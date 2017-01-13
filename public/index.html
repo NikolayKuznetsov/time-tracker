@@ -1,17 +1,43 @@
 <!DOCTYPE html>
 <html ng-app="app">
 <head>
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Title</title>
 
-    <link rel="stylesheet" href="css/main.min.css">
-</head>
+        <link rel="stylesheet" href="css/vendor.min.css">
+
+        <link rel="stylesheet" href="css/main.min.css">
+    </head>
 <body>
-<h1>test </h1>
 
-<div ng-controller="mainCtrl as main">
-    <div class="name" ng-bind="main.name"></div>
+<div id="wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div ng-init="timeTracker.initTimeTrackerCtrl()">
+                    <h2 ng-bind="timeTracker.title"></h2>
+                    <div ng-controller="TimeTrackerCtrl as timeTracker">
+                        <ul class="list-group">
+                            <li class="list-group-item" ng-repeat="value in timeTracker.values">
+                                <h4 class="list-group-item-heading" ng-bind="value.title"></h4>
+                                <p class="list-group-item-text" ng-bind="value.time"></p>
+                                <div class="input-group">
+                                    <span class="input-group-addon">$</span>
+                                    <input type="text" class="form-control" ng-value="value.cost" ng-disabled="true">
+                                </div>
+                            </li>
+                        </ul>
+
+                        <button ng-click="timeTracker.generationValue()">click generation</button>
+                        <button ng-click="timeTracker.getValue()">click get</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script src="scripts/vendor.min.js"></script>

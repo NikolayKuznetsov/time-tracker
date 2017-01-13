@@ -20,11 +20,11 @@
 
 <div id="wrapper">
     <div class="container-fluid">
-        <div class="row">
+        <div class="row" ng-controller="TimeTrackerCtrl as timeTracker">
             <div class="col-md-6">
                 <div ng-init="timeTracker.initTimeTrackerCtrl()">
                     <h2 ng-bind="timeTracker.title"></h2>
-                    <div ng-controller="TimeTrackerCtrl as timeTracker">
+                    <div>
                         <ul class="list-group">
                             <li class="list-group-item" ng-repeat="value in timeTracker.values">
                                 <h4 class="list-group-item-heading" ng-bind="value.title"></h4>
@@ -38,6 +38,40 @@
 
                         <button ng-click="timeTracker.generationValue()">click generation</button>
                         <button ng-click="timeTracker.getValue()">click get</button>
+                        <button ng-click="timeTracker.removeValue()">click remove</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form">
+                    <div class="form-group row col-md-12">
+                        <label class="col-md-12">Name task</label>
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" ng-model="timeTracker.addTask.name">
+                        </div>
+                    </div>
+                    <div class="form-group row col-md-12">
+                        <label class="col-md-12">Time</label>
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" ng-model="timeTracker.addTask.time">
+                        </div>
+                    </div>
+                    <div class="form-group row col-md-12">
+                        <label class="col-md-12">Cost</label>
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" ng-model="timeTracker.addTask.cost">
+                        </div>
+                    </div>
+                    <div class="form-group row col-md-12">
+                        <label class="col-md-12">Message</label>
+                        <div class="col-md-12">
+                            <textarea class="form-control" rows="3" ng-model="timeTracker.addTask.message"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row col-md-12">
+                    <div class="col-md-12 text-center">
+                        <button type="submit" class="btn btn-default" ng-click="timeTracker.addNewTask()">Add</button>
                     </div>
                 </div>
             </div>
