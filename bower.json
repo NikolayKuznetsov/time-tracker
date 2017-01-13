@@ -1,0 +1,22 @@
+{
+  "name": "angular-gulp",
+  "description": "start platform",
+  "main": "index.js",
+  "authors": [
+    "nikolay_kuznesov"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.6.1"
+  }
+}

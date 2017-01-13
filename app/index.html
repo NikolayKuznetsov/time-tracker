@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+
+        <!-- build:css css/main.min.css -->
+        <link rel="stylesheet" href="css/main.css">
+        <!-- endbuild -->
+    </head>
+<body>
+
+<div id="wrapper">
+    <!--<div ng-controller="mainCtrl as main">-->
+    <!--<div class="name" ng-bind="main.name"></div>-->
+    <!--</div>-->
+    <div ng-controller="TimeTrackerCtrl as timeTracker"
+         ng-init="timeTracker.initTimeTrackerCtrl()">
+        <h2 ng-bind="timeTracker.title"></h2>
+        <div ng-controller="TimeTrackerCtrl as timeTracker">
+            <div ng-bind="timeTracker.values"></div>
+            <button ng-click="timeTracker.generationValue()">click generation</button>
+            <button ng-click="timeTracker.getValue()">click get</button>
+        </div>
+    </div>
+</div>
+
+<!-- build:js scripts/vendor.min.js -->
+<script src="libs/angular/angular.min.js"></script>
+<!-- endbuild -->
+
+<!-- build:js scripts/app.min.js -->
+<script src="scripts/app.js"></script>
+
+<script src="scripts/shared/services/local-storage-service.js"></script>
+
+<!--<script src="scripts/controllers/main.controller.js"></script>-->
+
+<script src="scripts/controllers/time-tracker/time-tracker-controller.js"></script>
+<!-- endbuild -->
+
+</body>
+</html>
