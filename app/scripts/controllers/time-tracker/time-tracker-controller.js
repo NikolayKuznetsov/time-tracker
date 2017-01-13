@@ -1,5 +1,4 @@
 var TimeTrackerCtrl = function (LocalStorageService) {
-
     var tt = this;
 
     tt.keyLocalTimeTracker = 'time-tracker-values';
@@ -20,15 +19,22 @@ var TimeTrackerCtrl = function (LocalStorageService) {
 
     tt.initTimeTrackerCtrl = function () {
         console.log("init");
+        tt.generationValue();
+        tt.getValue();
     };
 
     tt.generationValue = function () {
+        console.log("generationValue");
         LocalStorageService.setObject(tt.keyLocalTimeTracker, tt.jsonLocalTimeTracker);
     };
 
     tt.getValue = function () {
+        console.log("getValue");
         tt.values = LocalStorageService.getObject(tt.keyLocalTimeTracker);
+        console.log(tt.values)
     };
+
+    tt.initTimeTrackerCtrl();
 
 };
 
