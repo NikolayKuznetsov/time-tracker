@@ -1,4 +1,4 @@
-var TimeTrackerCtrl = function (LocalStorageService) {
+var TimeTrackerCtrl = function (LocalStorageService, $timeout) {
     var tt = this;
 
     tt.KEY_LOCAL_TIME_TRACKER = 'time-tracker-values';
@@ -27,6 +27,9 @@ var TimeTrackerCtrl = function (LocalStorageService) {
     tt.addTask.time = '';
     tt.addTask.message = '';
     tt.addTask.cost = '';
+    tt.timeCounter = 0;
+    tt.btnStartTimer = false;
+    var timer = true;
 
     /*
      * Function init controller
@@ -91,9 +94,40 @@ var TimeTrackerCtrl = function (LocalStorageService) {
      * Validation from create task
      * */
     tt.validationForm = function () {
-        if ( tt.addTask.name == '' || tt.addTask.time == '' || tt.addTask.message == '' || tt.addTask.cost == '') {
+        if (tt.addTask.name == '' || tt.addTask.time == '' || tt.addTask.message == '' || tt.addTask.cost == '') {
             return true;
         }
+    };
+
+    /*
+     * Start: Counter task
+     * */
+    tt.startCounter = function () {
+        if (timer != null) {
+            tt.updateCounter();
+            tt.btnStartTimer = true;
+        } else {
+            timer = 0;
+            tt.updateCounter();
+            tt.btnStartTimer = true;
+        }
+    };
+
+    /*
+     * Stop: Counter task
+     * */
+    tt.stopCounter = function () {
+        $timeout.cancel(timer);
+        tt.btnStartTimer = false;
+        timer = null;
+    };
+
+    /*
+     * Update: Counter task
+     * */
+    tt.updateCounter = function () {
+        tt.timeCounter++;
+        timer = $timeout(tt.startCounter, 1000);
     };
 
     /*
@@ -103,5 +137,5 @@ var TimeTrackerCtrl = function (LocalStorageService) {
 
 };
 
-TimeTrackerCtrl.$inject = ['LocalStorageService'];
+TimeTrackerCtrl.$inject = ['LocalStorageService', '$timeout'];
 angular.module('app').controller('TimeTrackerCtrl', TimeTrackerCtrl);
