@@ -1,25 +1,8 @@
-var TimeTrackerCtrl = function (LocalStorageService, $timeout) {
+var TimeTrackerCtrl = function (LocalStorageService, $q, $http, $timeout) {
     var tt = this;
 
     tt.KEY_LOCAL_TIME_TRACKER = 'timeTrackerData';
-    tt.JSON_LOCAL_TIME_TRACKER = [
-        {
-            'title': 'Task #1',
-            'time': '120',
-            'message': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae, vel.',
-            'cost': '1200'
-        }, {
-            'title': 'Task #2',
-            'time': '220',
-            'message': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae, vel.',
-            'cost': '100'
-        }, {
-            'title': 'Task #3',
-            'time': '360',
-            'message': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae, vel.',
-            'cost': '300'
-        }
-    ];
+    tt.JSON_LOCAL_TIME_TRACKER = null;
     tt.title = 'Time tracker';
     tt.values = [];
     tt.addTask = {};
@@ -36,6 +19,21 @@ var TimeTrackerCtrl = function (LocalStorageService, $timeout) {
      * */
     tt.initTimeTrackerCtrl = function () {
         tt.getValue();
+        tt.generationValueJson();
+    };
+
+    /*
+     * Function init controller
+     * */
+    tt.generationValueJson = function () {
+        $http.get("/api/mainTimeTracking.json")
+            .then(
+                function (response) {
+                    tt.JSON_LOCAL_TIME_TRACKER = response.data;
+                },
+                function (error) {
+                    console.log("The request failed: " + error);
+                });
     };
 
     /*
@@ -83,6 +81,15 @@ var TimeTrackerCtrl = function (LocalStorageService, $timeout) {
     };
 
     /*
+     *  Remove element from values tasks
+     * */
+    tt.removeTask = function (id) {
+        tt.deleteItemArray(id, tt.values);
+        tt.deleteNullUndefinedFromArray();
+        tt.addValueLocalStorage(tt.values);
+    };
+
+    /*
      * Add value for new array values
      * */
     tt.addValuesNewArray = function (title, time, message, cost) {
@@ -94,6 +101,22 @@ var TimeTrackerCtrl = function (LocalStorageService, $timeout) {
      * */
     tt.addValuesArray = function (title, time, message, cost) {
         tt.values.push({'title': title, 'time': time, 'message': message, 'cost': cost});
+    };
+
+    /*
+     * Delete element from array
+     * */
+    tt.deleteItemArray = function (id, array) {
+        delete array[id];
+    };
+
+    /*
+     * Delete null and undefined from array values tasks
+     * */
+    tt.deleteNullUndefinedFromArray = function () {
+        tt.values = tt.values.filter(function (x) {
+            return x !== undefined && x !== null;
+        });
     };
 
     /*
@@ -166,5 +189,5 @@ var TimeTrackerCtrl = function (LocalStorageService, $timeout) {
 
 };
 
-TimeTrackerCtrl.$inject = ['LocalStorageService', '$timeout'];
+TimeTrackerCtrl.$inject = ['LocalStorageService', '$q', '$http', '$timeout'];
 angular.module('app').controller('TimeTrackerCtrl', TimeTrackerCtrl);

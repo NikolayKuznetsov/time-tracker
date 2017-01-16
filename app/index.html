@@ -16,25 +16,79 @@
         <link rel="stylesheet" href="css/main.css">
         <!-- endbuild -->
     </head>
-<body>
+<body class="body-container">
 
 <div id="wrapper">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed"
+                        data-toggle="collapse"
+                        data-target="#navbar"
+                        aria-expanded="false"
+                        aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Project name</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="#">Settings</a></li>
+                    <li><a href="#">Profile</a></li>
+                    <li><a href="#">Help</a></li>
+                </ul>
+                <form class="navbar-form navbar-right">
+                    <input type="text" class="form-control" placeholder="Search...">
+                </form>
+            </div>
+        </div>
+    </nav>
     <div class="container-fluid">
         <div class="row" ng-controller="TimeTrackerCtrl as timeTracker">
             <div class="col-md-6">
                 <div ng-init="timeTracker.initTimeTrackerCtrl()">
                     <h2 ng-bind="timeTracker.title"></h2>
                     <div>
-                        <ul class="list-group">
-                            <li class="list-group-item" ng-repeat="value in timeTracker.values">
-                                <h4 class="list-group-item-heading" ng-bind="value.title"></h4>
-                                <p class="list-group-item-text" ng-bind="timeTracker.timeFormat(value.time)"></p>
-                                <div class="input-group">
-                                    <span class="input-group-addon">$</span>
-                                    <input type="text" class="form-control" ng-value="value.cost" ng-disabled="true">
-                                </div>
-                            </li>
-                        </ul>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Index</th>
+                                <th>Name</th>
+                                <th>Time</th>
+                                <th>Cost</th>
+                                <th>Message</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tboby>
+                                <tr ng-repeat="value in timeTracker.values track by $index">
+                                    <td ng-bind="$index"></td>
+                                    <td ng-bind="value.title"></td>
+                                    <td ng-bind="timeTracker.timeFormat(value.time)"></td>
+                                    <td ng-bind="value.cost"></td>
+                                    <td ng-bind="value.message"></td>
+                                    <td>
+                                        <button class="btn btn-danger"
+                                                ng-click="timeTracker.removeTask($index)"
+                                                ng-bind="'Remove'"></button>
+                                    </td>
+                                </tr>
+                            </tboby>
+                        </table>
+                        <!--<ul class="list-group">-->
+                        <!--<li class="list-group-item" >-->
+                        <!--<h4 class="list-group-item-heading" ng-bind="value.title"></h4>-->
+                        <!--<p class="list-group-item-text" ng-bind="timeTracker.timeFormat(value.time)"></p>-->
+                        <!--<div class="input-group">-->
+                        <!--<span class="input-group-addon">$</span>-->
+                        <!--<input type="text" class="form-control" ng-value="value.cost" ng-disabled="true">-->
+                        <!--</div>-->
+                        <!--</li>-->
+                        <!--</ul>-->
 
                         <button ng-click="timeTracker.generationValue()">click generation</button>
                         <button ng-click="timeTracker.getValue()">click get</button>
@@ -84,11 +138,13 @@
                 <h3 ng-bind="timeTracker.timeCounter"></h3>
                 <button class="btn btn-primary"
                         ng-disabled="timeTracker.btnStartTimer"
-                        ng-click="timeTracker.startCounter()">startCounter</button>
+                        ng-click="timeTracker.startCounter()">startCounter
+                </button>
 
                 <button class="btn btn-danger"
                         ng-disabled="!timeTracker.btnStartTimer"
-                        ng-click="timeTracker.stopCounter()">stopCounter</button>
+                        ng-click="timeTracker.stopCounter()">stopCounter
+                </button>
             </div>
         </div>
     </div>
