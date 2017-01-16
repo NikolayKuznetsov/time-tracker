@@ -1,13 +1,13 @@
-var TimeTrackerModalCtrl = function ($uibModalInstance, LocalStorageService) {
-    ttm = this;
+var TimeTrackerModalCtrl = function ($uibModalInstance, TimeTrackerService) {
+    var ttm = this;
 
-    ttm.KEY_LOCAL_TIME_TRACKER = 'timeTrackerData';
+    // ttm.KEY_LOCAL_TIME_TRACKER = 'timeTrackerData';
     ttm.addTask = {};
     ttm.addTask.name = '';
     ttm.addTask.time = '';
     ttm.addTask.message = '';
     ttm.addTask.cost = '';
-    ttm.values = [];
+    ttm.values = TimeTrackerService.values;
 
     /*
      * Validation from create task
@@ -28,17 +28,10 @@ var TimeTrackerModalCtrl = function ($uibModalInstance, LocalStorageService) {
         } else {
             ttm.addValuesArray(ttm.addTask.name, ttm.addTask.time, ttm.addTask.message, ttm.addTask.cost);
         }
-        ttm.addValueLocalStorage(ttm.values);
+        TimeTrackerService.addValueLocalStorage(ttm.values);
         // Clean form
         ttm.cleanForm();
         $uibModalInstance.close();
-    };
-
-    /*
-     *  Get all tasks with LocalStorage
-     * */
-    ttm.getValue = function () {
-        ttm.values = LocalStorageService.getObject(ttm.KEY_LOCAL_TIME_TRACKER);
     };
 
     /*
@@ -56,12 +49,11 @@ var TimeTrackerModalCtrl = function ($uibModalInstance, LocalStorageService) {
     };
 
     /*
-     *  Write tasks for LocalStorage
+     *  Get all tasks with LocalStorage
      * */
-    ttm.addValueLocalStorage = function (jsonValues) {
-        LocalStorageService.setObject(ttm.KEY_LOCAL_TIME_TRACKER, jsonValues);
+    ttm.getValue = function () {
+        ttm.values = TimeTrackerService.getValue();
     };
-
     /*
      * Clean from create task
      * */
@@ -72,5 +64,5 @@ var TimeTrackerModalCtrl = function ($uibModalInstance, LocalStorageService) {
 
 };
 
-TimeTrackerModalCtrl.$inject = ['$uibModalInstance', 'LocalStorageService'];
+TimeTrackerModalCtrl.$inject = ['$uibModalInstance', 'TimeTrackerService'];
 angular.module('app').controller('TimeTrackerModalCtrl', TimeTrackerModalCtrl);
