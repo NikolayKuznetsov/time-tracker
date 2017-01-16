@@ -79,16 +79,6 @@
                                 </tr>
                             </tboby>
                         </table>
-                        <!--<ul class="list-group">-->
-                        <!--<li class="list-group-item" >-->
-                        <!--<h4 class="list-group-item-heading" ng-bind="value.title"></h4>-->
-                        <!--<p class="list-group-item-text" ng-bind="timeTracker.timeFormat(value.time)"></p>-->
-                        <!--<div class="input-group">-->
-                        <!--<span class="input-group-addon">$</span>-->
-                        <!--<input type="text" class="form-control" ng-value="value.cost" ng-disabled="true">-->
-                        <!--</div>-->
-                        <!--</li>-->
-                        <!--</ul>-->
 
                         <button ng-click="timeTracker.generationValue()">click generation</button>
                         <button ng-click="timeTracker.getValue()">click get</button>
@@ -97,40 +87,19 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="form">
-                    <div class="form-group row col-md-12">
-                        <label class="col-md-12">Name task</label>
-                        <div class="col-md-12">
-                            <input type="text" class="form-control" ng-model="timeTracker.addTask.name">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                    Popup Add task
+                </button>
+
+                <button type="button" class="btn btn-default" ng-click="timeTracker.openModal('sm')">Small modal</button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+
                         </div>
-                    </div>
-                    <div class="form-group row col-md-12">
-                        <label class="col-md-12">Time</label>
-                        <div class="col-md-12">
-                            <input type="text" class="form-control" ng-model="timeTracker.addTask.time">
-                        </div>
-                    </div>
-                    <div class="form-group row col-md-12">
-                        <label class="col-md-12">Cost</label>
-                        <div class="col-md-12">
-                            <input type="text" class="form-control" ng-model="timeTracker.addTask.cost">
-                        </div>
-                    </div>
-                    <div class="form-group row col-md-12">
-                        <label class="col-md-12">Message</label>
-                        <div class="col-md-12">
-                            <textarea class="form-control" rows="3" ng-model="timeTracker.addTask.message"></textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row col-md-12">
-                    <div class="col-md-12 text-center">
-                        <button class="btn btn-success"
-                                type="submit"
-                                ng-disabled="timeTracker.validationForm()"
-                                ng-click="timeTracker.addNewTask()">
-                            Add
-                        </button>
                     </div>
                 </div>
             </div>
@@ -155,6 +124,7 @@
 <script src="libs/jquery/dist/jquery.min.js"></script>
 <script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="libs/angular-bootstrap/ui-bootstrap.min.js"></script>
+<script src="libs/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 <!-- endbuild -->
 
 <!-- build:js scripts/app.min.js -->
@@ -165,6 +135,7 @@
 <!--<script src="scripts/controllers/main.controller.js"></script>-->
 
 <script src="scripts/controllers/time-tracker/time-tracker-controller.js"></script>
+<script src="scripts/controllers/time-tracker/time-tracker-modal-controller.js"></script>
 <!-- endbuild -->
 
 </body>

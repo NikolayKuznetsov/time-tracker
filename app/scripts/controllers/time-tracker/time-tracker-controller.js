@@ -1,15 +1,15 @@
-var TimeTrackerCtrl = function (LocalStorageService, $q, $http, $timeout) {
+var TimeTrackerCtrl = function (LocalStorageService, $q, $http, $timeout, $uibModal) {
     var tt = this;
 
     tt.KEY_LOCAL_TIME_TRACKER = 'timeTrackerData';
     tt.JSON_LOCAL_TIME_TRACKER = null;
     tt.title = 'Time tracker';
     tt.values = [];
-    tt.addTask = {};
-    tt.addTask.name = '';
-    tt.addTask.time = '';
-    tt.addTask.message = '';
-    tt.addTask.cost = '';
+    // tt.addTask = {};
+    // tt.addTask.name = '';
+    // tt.addTask.time = '';
+    // tt.addTask.message = '';
+    // tt.addTask.cost = '';
     tt.timeCounter = 0;
     tt.btnStartTimer = false;
     var timer = true;
@@ -23,7 +23,7 @@ var TimeTrackerCtrl = function (LocalStorageService, $q, $http, $timeout) {
     };
 
     /*
-     * Function init controller
+     * Generation Value JSON
      * */
     tt.generationValueJson = function () {
         $http.get("/api/mainTimeTracking.json")
@@ -52,32 +52,11 @@ var TimeTrackerCtrl = function (LocalStorageService, $q, $http, $timeout) {
     };
 
     /*
-     *  Write tasks for LocalStorage
-     * */
-    tt.addValueLocalStorage = function (jsonValues) {
-        LocalStorageService.setObject(tt.KEY_LOCAL_TIME_TRACKER, jsonValues);
-    };
-
-    /*
      *  Remove all tasks with LocalStorage
      * */
     tt.removeValue = function () {
         LocalStorageService.removeString(tt.KEY_LOCAL_TIME_TRACKER);
         tt.getValue();
-    };
-
-    /*
-     *  Add new task for list and LocalStorage
-     * */
-    tt.addNewTask = function () {
-        if (tt.values === null) {
-            tt.addValuesNewArray(tt.addTask.name, tt.addTask.time, tt.addTask.message, tt.addTask.cost);
-        } else {
-            tt.addValuesArray(tt.addTask.name, tt.addTask.time, tt.addTask.message, tt.addTask.cost);
-        }
-        tt.addValueLocalStorage(tt.values);
-        // Clean form
-        tt.cleanForm();
     };
 
     /*
@@ -87,20 +66,6 @@ var TimeTrackerCtrl = function (LocalStorageService, $q, $http, $timeout) {
         tt.deleteItemArray(id, tt.values);
         tt.deleteNullUndefinedFromArray();
         tt.addValueLocalStorage(tt.values);
-    };
-
-    /*
-     * Add value for new array values
-     * */
-    tt.addValuesNewArray = function (title, time, message, cost) {
-        tt.values = [{'title': title, 'time': time, 'message': message, 'cost': cost}];
-    };
-
-    /*
-     * Add value for array values
-     * */
-    tt.addValuesArray = function (title, time, message, cost) {
-        tt.values.push({'title': title, 'time': time, 'message': message, 'cost': cost});
     };
 
     /*
@@ -120,19 +85,10 @@ var TimeTrackerCtrl = function (LocalStorageService, $q, $http, $timeout) {
     };
 
     /*
-     * Clean from create task
+     *  Write tasks for LocalStorage
      * */
-    tt.cleanForm = function () {
-        tt.addTask.name = tt.addTask.time = tt.addTask.message = tt.addTask.cost = '';
-    };
-
-    /*
-     * Validation from create task
-     * */
-    tt.validationForm = function () {
-        if (tt.addTask.name == '' || tt.addTask.time == '' || tt.addTask.message == '' || tt.addTask.cost == '') {
-            return true;
-        }
+    tt.addValueLocalStorage = function (jsonValues) {
+        LocalStorageService.setObject(tt.KEY_LOCAL_TIME_TRACKER, jsonValues);
     };
 
     /*
@@ -183,11 +139,34 @@ var TimeTrackerCtrl = function (LocalStorageService, $q, $http, $timeout) {
     };
 
     /*
+     * openModal
+     * */
+    tt.openModal = function (size) {
+        var modalInstance = $uibModal.open({
+            templateUrl: 'scripts/controllers/time-tracker/modal/add-time-tracker.html',
+            controller: 'TimeTrackerModalCtrl',
+            controllerAs: '$ctrl',
+            size: size,
+            resolve: {
+                addTask: function () {
+                    return tt.addTask;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (response) {
+            tt.getValue();
+        }, function () {
+            console.log('Modal dismissed at: ' + new Date());
+        });
+    };
+
+    /*
      * Init Time Tracker Controller
      * */
     tt.initTimeTrackerCtrl();
 
 };
 
-TimeTrackerCtrl.$inject = ['LocalStorageService', '$q', '$http', '$timeout'];
+TimeTrackerCtrl.$inject = ['LocalStorageService', '$q', '$http', '$timeout', '$uibModal'];
 angular.module('app').controller('TimeTrackerCtrl', TimeTrackerCtrl);
