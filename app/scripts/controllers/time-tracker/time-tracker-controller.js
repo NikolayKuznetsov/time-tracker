@@ -1,22 +1,22 @@
 var TimeTrackerCtrl = function (LocalStorageService, $timeout) {
     var tt = this;
 
-    tt.KEY_LOCAL_TIME_TRACKER = 'time-tracker-values';
+    tt.KEY_LOCAL_TIME_TRACKER = 'timeTrackerData';
     tt.JSON_LOCAL_TIME_TRACKER = [
         {
-            'title': 'test 1',
-            'time': '1',
-            'message': 'lorem 1',
+            'title': 'Task #1',
+            'time': '120',
+            'message': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae, vel.',
             'cost': '1200'
         }, {
-            'title': 'test 2',
-            'time': '2',
-            'message': 'lorem 2',
+            'title': 'Task #2',
+            'time': '220',
+            'message': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae, vel.',
             'cost': '100'
         }, {
-            'title': 'test 3',
-            'time': '3',
-            'message': 'lorem 3',
+            'title': 'Task #3',
+            'time': '360',
+            'message': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae, vel.',
             'cost': '300'
         }
     ];
@@ -72,15 +72,28 @@ var TimeTrackerCtrl = function (LocalStorageService, $timeout) {
      *  Add new task for list and LocalStorage
      * */
     tt.addNewTask = function () {
-        tt.values.push({
-            title: tt.addTask.name,
-            time: tt.addTask.time,
-            message: tt.addTask.message,
-            cost: tt.addTask.cost
-        });
+        if (tt.values === null) {
+            tt.addValuesNewArray(tt.addTask.name, tt.addTask.time, tt.addTask.message, tt.addTask.cost);
+        } else {
+            tt.addValuesArray(tt.addTask.name, tt.addTask.time, tt.addTask.message, tt.addTask.cost);
+        }
         tt.addValueLocalStorage(tt.values);
         // Clean form
         tt.cleanForm();
+    };
+
+    /*
+     * Add value for new array values
+     * */
+    tt.addValuesNewArray = function (title, time, message, cost) {
+        tt.values = [{'title': title, 'time': time, 'message': message, 'cost': cost}];
+    };
+
+    /*
+     * Add value for array values
+     * */
+    tt.addValuesArray = function (title, time, message, cost) {
+        tt.values.push({'title': title, 'time': time, 'message': message, 'cost': cost});
     };
 
     /*
