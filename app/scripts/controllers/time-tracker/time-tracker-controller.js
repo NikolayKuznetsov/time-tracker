@@ -88,6 +88,15 @@ var TimeTrackerCtrl = function (LocalStorageService) {
     };
 
     /*
+     * Validation from create task
+     * */
+    tt.validationForm = function () {
+        if ( tt.addTask.name == '' || tt.addTask.time == '' || tt.addTask.message == '' || tt.addTask.cost == '') {
+            return true;
+        }
+    };
+
+    /*
      * Init Time Tracker Controller
      * */
     tt.initTimeTrackerCtrl();
