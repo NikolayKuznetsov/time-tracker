@@ -28,7 +28,7 @@
                         <ul class="list-group">
                             <li class="list-group-item" ng-repeat="value in timeTracker.values">
                                 <h4 class="list-group-item-heading" ng-bind="value.title"></h4>
-                                <p class="list-group-item-text" ng-bind="value.time"></p>
+                                <p class="list-group-item-text" ng-bind="timeTracker.timeFormat(value.time)"></p>
                                 <div class="input-group">
                                     <span class="input-group-addon">$</span>
                                     <input type="text" class="form-control" ng-value="value.cost" ng-disabled="true">
