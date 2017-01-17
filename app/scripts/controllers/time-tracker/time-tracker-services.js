@@ -8,8 +8,6 @@ var TimeTrackerService = function (LocalStorageService) {
      *  Get all tasks with LocalStorage
      * */
     tts.getValue = function () {
-        console.log('getValue - service');
-
         tts.values = LocalStorageService.getObject(tts.KEY_LOCAL_TIME_TRACKER);
     };
 

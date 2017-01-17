@@ -1,7 +1,5 @@
 var TimeTrackerModalCtrl = function ($uibModalInstance, TimeTrackerService) {
     var ttm = this;
-
-    // ttm.KEY_LOCAL_TIME_TRACKER = 'timeTrackerData';
     ttm.addTask = {};
     ttm.addTask.name = '';
     ttm.addTask.time = '';
@@ -9,6 +7,7 @@ var TimeTrackerModalCtrl = function ($uibModalInstance, TimeTrackerService) {
     ttm.addTask.cost = '';
     ttm.values = TimeTrackerService.values;
     ttm.valuesAdd = [];
+
 
     /*
      * Validation from create task

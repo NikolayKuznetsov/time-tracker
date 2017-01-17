@@ -75,19 +75,21 @@
                                         <button class="btn btn-danger"
                                                 ng-click="timeTracker.removeTask($index)"
                                                 ng-bind="'Remove'"></button>
+                                        <button class="btn btn-default"
+                                                ng-click="timeTracker.editTask($index)"
+                                                ng-bind="'Edit'"></button>
                                     </td>
                                 </tr>
                             </tboby>
                         </table>
 
                         <button ng-click="timeTracker.generationValue()">click generation</button>
-                        <button ng-click="timeTracker.getValue()">click get</button>
                         <button ng-click="timeTracker.removeValue()">click remove</button>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
-                <button type="button" class="btn btn-default" ng-click="timeTracker.openModal('sm')">Small modal</button>
+                <button type="button" class="btn btn-default" ng-click="timeTracker.openModalAddTask('sm')">Small modal</button>
             </div>
             <div class="col-md-12">
                 <h3 ng-bind="timeTracker.timeCounter"></h3>
