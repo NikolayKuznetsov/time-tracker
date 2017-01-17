@@ -1,14 +1,14 @@
 # time-tracker
 
-Install
+##Install##
 
 npm i 
 bower i
 
-Start
+##Start##
 gulp
 
 http://localhost:9001/
 
-Build
+##Build##
 gulp build
