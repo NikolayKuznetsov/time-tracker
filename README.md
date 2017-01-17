@@ -3,6 +3,7 @@
 ##Install##
 
 npm i 
+
 bower i
 
 ##Start##
