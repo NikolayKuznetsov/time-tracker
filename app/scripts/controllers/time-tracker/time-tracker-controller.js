@@ -62,25 +62,6 @@ var TimeTrackerCtrl = function (LocalStorageService, TimeTrackerService, $q, $ht
      * */
     tt.removeTask = function (id) {
         TimeTrackerService.removeTask(id);
-        // tt.deleteItemArray(id, tt.values);
-        // tt.deleteNullUndefinedFromArray();
-        // TimeTrackerService.addValueLocalStorage(tt.values);
-    };
-
-    /*
-     * Delete element from array
-     * */
-    tt.deleteItemArray = function (id, array) {
-        delete array[id];
-    };
-
-    /*
-     * Delete null and undefined from array values tasks
-     * */
-    tt.deleteNullUndefinedFromArray = function () {
-        tt.values = tt.values.filter(function (x) {
-            return x !== undefined && x !== null;
-        });
     };
 
     /*

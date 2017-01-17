@@ -8,6 +8,7 @@ var TimeTrackerModalCtrl = function ($uibModalInstance, TimeTrackerService) {
     ttm.addTask.message = '';
     ttm.addTask.cost = '';
     ttm.values = TimeTrackerService.values;
+    ttm.valuesAdd = [];
 
     /*
      * Validation from create task
@@ -22,38 +23,29 @@ var TimeTrackerModalCtrl = function ($uibModalInstance, TimeTrackerService) {
      *  Add new task for list and LocalStorage
      * */
     ttm.addNewTask = function () {
-        ttm.getValue();
-        if (ttm.values === null) {
-            ttm.addValuesNewArray(ttm.addTask.name, ttm.addTask.time, ttm.addTask.message, ttm.addTask.cost);
-        } else {
-            ttm.addValuesArray(ttm.addTask.name, ttm.addTask.time, ttm.addTask.message, ttm.addTask.cost);
-        }
-        TimeTrackerService.addValueLocalStorage(ttm.values);
+        ttm.addValuesArray(ttm.addTask.name, ttm.addTask.time, ttm.addTask.message, ttm.addTask.cost);
+
+        TimeTrackerService.addValueLocalStorage(ttm.valuesAdd);
         // Clean form
         ttm.cleanForm();
         $uibModalInstance.close();
-    };
-
-    /*
-     * Add value for new array values
-     * */
-    ttm.addValuesNewArray = function (title, time, message, cost) {
-        ttm.values = [{'title': title, 'time': time, 'message': message, 'cost': cost}];
+        ttm.getValue();
     };
 
     /*
      * Add value for array values
      * */
     ttm.addValuesArray = function (title, time, message, cost) {
-        ttm.values.push({'title': title, 'time': time, 'message': message, 'cost': cost});
+        ttm.valuesAdd = [{'title': title, 'time': time, 'message': message, 'cost': cost}];
     };
 
     /*
      *  Get all tasks with LocalStorage
      * */
     ttm.getValue = function () {
-        ttm.values = TimeTrackerService.getValue();
+        ttm.values = TimeTrackerService.values;
     };
+
     /*
      * Clean from create task
      * */
