@@ -112,14 +112,19 @@ var TimeTrackerCtrl = function (LocalStorageService, TimeTrackerService, $q, $ht
     };
 
     /*
-     * openModalAddTask
+     * Modal Add Task
      * */
     tt.openModalAddTask = function (size) {
         var modalInstance = $uibModal.open({
             templateUrl: 'scripts/controllers/time-tracker/modal/add-time-tracker.html',
             controller: 'TimeTrackerModalCtrl',
             controllerAs: '$ctrl',
-            size: size
+            size: size,
+            resolve: {
+                id: function () {
+                    return undefined;
+                }
+            }
         });
 
         modalInstance.result.then(function () {
@@ -130,21 +135,21 @@ var TimeTrackerCtrl = function (LocalStorageService, TimeTrackerService, $q, $ht
     };
 
     /*
-     * editTask
+     * Modal Edit Task
      * */
-    // tt.editTask = function (id) {
-    //     $uibModal.open({
-    //         templateUrl: 'scripts/controllers/time-tracker/modal/add-time-tracker.html',
-    //         controller: 'TimeTrackerModalCtrl',
-    //         controllerAs: '$test',
-    //         size: 'sm',
-    //         resolve: {
-    //             id: function () {
-    //                 return id;
-    //             }
-    //         }
-    //     });
-    // };
+    tt.editTask = function (id) {
+        $uibModal.open({
+            templateUrl: 'scripts/controllers/time-tracker/modal/add-time-tracker.html',
+            controller: 'TimeTrackerModalCtrl',
+            controllerAs: '$ctrl',
+            size: 'sm',
+            resolve: {
+                id: function () {
+                    return id;
+                }
+            }
+        });
+    };
 
     /*
      * Init Time Tracker Controller
