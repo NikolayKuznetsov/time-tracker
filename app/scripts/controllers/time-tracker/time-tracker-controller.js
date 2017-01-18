@@ -121,7 +121,7 @@ var TimeTrackerCtrl = function (LocalStorageService, TimeTrackerService, $q, $ht
             controllerAs: '$ctrl',
             size: size,
             resolve: {
-                id: function () {
+                data: function () {
                     return undefined;
                 }
             }
@@ -138,16 +138,21 @@ var TimeTrackerCtrl = function (LocalStorageService, TimeTrackerService, $q, $ht
      * Modal Edit Task
      * */
     tt.editTask = function (id) {
-        $uibModal.open({
+        var modalInstance = $uibModal.open({
             templateUrl: 'scripts/controllers/time-tracker/modal/add-time-tracker.html',
             controller: 'TimeTrackerModalCtrl',
             controllerAs: '$ctrl',
             size: 'sm',
             resolve: {
-                id: function () {
-                    return id;
+                data: function () {
+                    return tt.values[id];
                 }
             }
+        });
+        modalInstance.result.then(function () {
+            tt.getValue();
+        }, function () {
+            console.log('Modal dismissed at: ' + new Date());
         });
     };
 

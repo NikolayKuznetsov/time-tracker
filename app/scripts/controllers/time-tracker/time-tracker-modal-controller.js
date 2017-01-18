@@ -1,13 +1,13 @@
-var TimeTrackerModalCtrl = function ($uibModalInstance, TimeTrackerService, id) {
+var TimeTrackerModalCtrl = function ($uibModalInstance, TimeTrackerService, data) {
     var ttm = this;
     ttm.addTask = {};
-    ttm.addTask.name = '';
-    ttm.addTask.time = '';
-    ttm.addTask.message = '';
-    ttm.addTask.cost = '';
+    ttm.addTask.name = data ? data.name : '';
+    ttm.addTask.time = data ? data.time : '';
+    ttm.addTask.message = data ? data.message : '';
+    ttm.addTask.cost = data ? data.cost : '';
     ttm.values = TimeTrackerService.values;
     ttm.valuesAdd = [];
-    ttm.id = id;
+    ttm.id = data ? data.id : null;
 
     /*
      * Validation from create task
@@ -35,7 +35,7 @@ var TimeTrackerModalCtrl = function ($uibModalInstance, TimeTrackerService, id) 
      * Add value for array values
      * */
     ttm.addValuesArray = function (title, time, message, cost) {
-        ttm.valuesAdd = [{'title': title, 'time': time, 'message': message, 'cost': cost}];
+        ttm.valuesAdd = [{'id': ttm.values.length + 1, 'name': title, 'time': time, 'message': message, 'cost': cost}];
     };
 
     /*
@@ -55,5 +55,5 @@ var TimeTrackerModalCtrl = function ($uibModalInstance, TimeTrackerService, id) 
 
 };
 
-TimeTrackerModalCtrl.$inject = ['$uibModalInstance', 'TimeTrackerService', 'id'];
+TimeTrackerModalCtrl.$inject = ['$uibModalInstance', 'TimeTrackerService', 'data'];
 angular.module('app').controller('TimeTrackerModalCtrl', TimeTrackerModalCtrl);
