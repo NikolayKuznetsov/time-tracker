@@ -1,8 +1,9 @@
 var TimeTrackerModalCtrl = function ($uibModalInstance, TimeTrackerService, data, moment, $filter) {
     var ttm = this;
+    var dateEdit = data ? new Date(data.time * 1000) : 0;
     ttm.addTask = {};
     ttm.addTask.name = data ? data.name : '';
-    ttm.addTask.time = data ? new Date(data.time * 1000) : '';
+    ttm.addTask.time = data ? new Date(dateEdit.getUTCFullYear(), dateEdit.getUTCMonth(), dateEdit.getUTCDate(), dateEdit.getUTCHours(), dateEdit.getUTCMinutes(), dateEdit.getUTCSeconds()) : '';
     ttm.addTask.message = data ? data.message : '';
     ttm.addTask.cost = data ? data.cost : '';
     ttm.addTask.status = data ? data.status : '';
@@ -86,8 +87,18 @@ var TimeTrackerModalCtrl = function ($uibModalInstance, TimeTrackerService, data
      * Convert date to seconds
      * */
     ttm.convertDateToSeconds = function (date) {
-        var newDate = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
-        return moment.duration($filter('date')(newDate, 'HH:mm:ss'), "HH:mm:ss").asSeconds();
+        console.log(date);
+        // var newDate = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
+        return moment.duration($filter('date')(new Date(date), 'HH:mm:ss'), "HH:mm:ss").asSeconds();
+    };
+
+    /*
+     * convertDateUTC
+     * */
+    ttm.convertDateUTC = function (date) {
+        // return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
+        var d = new Date(date * 1000);
+        return new Date(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds());
     };
 
 };
