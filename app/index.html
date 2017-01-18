@@ -61,6 +61,7 @@
                                 <th>Time</th>
                                 <th>Cost</th>
                                 <th>Message</th>
+                                <th>dateCreate</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -71,6 +72,7 @@
                                     <td ng-bind="timeTracker.timeFormat(value.time)"></td>
                                     <td ng-bind="value.cost"></td>
                                     <td ng-bind="value.message"></td>
+                                    <td ng-bind="value.dateCreate | date:'dd-MM-yyyy H:mm'"></td>
                                     <td>
                                         <button class="btn btn-danger"
                                                 ng-click="timeTracker.removeTask($index)"
