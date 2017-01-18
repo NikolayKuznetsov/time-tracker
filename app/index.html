@@ -64,7 +64,7 @@
                                 <th>Action</th>
                             </tr>
                             </thead>
-                            <tboby>
+                            <tbody>
                                 <tr ng-repeat="value in timeTracker.values track by $index">
                                     <td ng-bind="value.id"></td>
                                     <td ng-bind="value.name"></td>
@@ -80,7 +80,7 @@
                                                 ng-bind="'Edit'"></button>
                                     </td>
                                 </tr>
-                            </tboby>
+                            </tbody>
                         </table>
 
                         <button ng-click="timeTracker.generationValue()">click generation</button>
