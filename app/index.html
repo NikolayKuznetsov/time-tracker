@@ -53,35 +53,39 @@
                 <div ng-init="timeTracker.initTimeTrackerCtrl()">
                     <h2 ng-bind="timeTracker.title"></h2>
                     <div>
-                        <table class="table">
+                        <table class="table table--task">
                             <thead>
                             <tr>
-                                <th>Index</th>
-                                <th>Name</th>
-                                <th>Time</th>
-                                <th>Cost</th>
-                                <th>Message</th>
-                                <th>dateCreate</th>
-                                <th>Action</th>
+                                <th class="index">Index</th>
+                                <th class="name">Name</th>
+                                <th class="time">Time</th>
+                                <th class="cost">Cost</th>
+                                <th class="status">Status</th>
+                                <th class="message">Message</th>
+                                <th class="data-create">dateCreate</th>
+                                <th class="action">Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="value in timeTracker.values track by $index">
-                                    <td ng-bind="value.id"></td>
-                                    <td ng-bind="value.name"></td>
-                                    <td ng-bind="timeTracker.timeFormat(value.time)"></td>
-                                    <td ng-bind="value.cost"></td>
-                                    <td ng-bind="value.message"></td>
-                                    <td ng-bind="value.dateCreate | date:'dd-MM-yyyy H:mm'"></td>
-                                    <td>
-                                        <button class="btn btn-danger"
-                                                ng-click="timeTracker.removeTask($index)"
-                                                ng-bind="'Remove'"></button>
-                                        <button class="btn btn-default"
-                                                ng-click="timeTracker.editTask($index)"
-                                                ng-bind="'Edit'"></button>
-                                    </td>
-                                </tr>
+                            <tr ng-repeat="value in timeTracker.values track by $index">
+                                <td class="index" ng-bind="value.id"></td>
+                                <td class="name" ng-bind="value.name"></td>
+                                <td class="time" ng-bind="timeTracker.timeFormat(value.time)"></td>
+                                <td class="cost" ng-bind="value.cost"></td>
+                                <td class="status" ng-bind="value.status"></td>
+                                <td class="message" ng-bind="value.message"></td>
+                                <td class="data-create" ng-bind="value.dateCreate | date:'dd-MM-yyyy HH:mm'"></td>
+                                <td class="action">
+                                    <button class="btn btn-danger"
+                                            ng-click="timeTracker.removeTask($index)">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </button>
+                                    <button class="btn btn-default"
+                                            ng-click="timeTracker.editTask($index)">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </button>
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
 
@@ -141,6 +145,9 @@
 <script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="libs/angular-bootstrap/ui-bootstrap.min.js"></script>
 <script src="libs/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+
+<script src="libs/moment/moment.js"></script>
+<script src="libs/angular-moment/angular-moment.js"></script>
 <!-- endbuild -->
 
 <!-- build:js scripts/app.min.js -->

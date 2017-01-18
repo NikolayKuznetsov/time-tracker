@@ -19,5 +19,8 @@
   "dependencies": {
     "angular": "~1.6.1",
     "angular-bootstrap": "~2.4.0"
+  },
+  "devDependencies": {
+    "angular-moment": "~1.0.1"
   }
 }

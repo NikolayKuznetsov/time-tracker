@@ -87,3 +87,25 @@ ul.timeline li {
   font-size: .9375em;
   line-height: 1.3;
   color: #aab6aa; }
+
+/* Table */
+.table--task .index {
+  width: 5%; }
+
+.table--task .time {
+  width: 10%; }
+
+.table--task .cost {
+  width: 10%; }
+
+.table--task .status {
+  width: 5%; }
+
+.table--task .message {
+  width: 20%; }
+
+.table--task .data-create {
+  width: 15%; }
+
+.table--task .action {
+  width: 15%; }

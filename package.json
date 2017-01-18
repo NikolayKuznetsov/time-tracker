@@ -18,5 +18,9 @@
     "gulp-server-livereload": "^1.9.2",
     "gulp-uglify": "^2.0.0",
     "gulp-useref": "^3.1.2"
+  },
+  "dependencies": {
+    "angular-moment": "^1.0.1",
+    "moment": "^2.17.1"
   }
 }

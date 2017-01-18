@@ -4,34 +4,44 @@
     "name": "Task #1",
     "time": 120,
     "message": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae, vel.",
-    "cost": 120
+    "cost": 120,
+    "status": "open",
+    "dateCreate": "2017-01-13T10:01:00.000Z"
   },
   {
     "id": 1,
     "name": "Task #2",
     "time": 240,
     "message": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae, vel.",
-    "cost": 60
+    "cost": 60,
+    "status": "close",
+    "dateCreate": "2017-01-14T16:03:00.000Z"
   },
   {
     "id": 2,
     "name": "Task #3",
     "time": 361,
     "message": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae, vel.",
-    "cost": 17.5
+    "cost": 17.5,
+    "status": "progress",
+    "dateCreate": "2017-01-15T01:15:00.000Z"
   },
   {
     "id": 3,
     "name": "Task #4",
     "time": 98,
     "message": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae, vel.",
-    "cost": 100
+    "cost": 100,
+    "status": "open",
+    "dateCreate": "2017-01-16T06:25:00.000Z"
   },
   {
     "id": 4,
     "name": "Task #5",
     "time": 1020,
     "message": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae, vel.",
-    "cost": 13
+    "cost": 13,
+    "status": "open",
+    "dateCreate": "2017-01-17T01:55:00.000Z"
   }
 ]

@@ -13,13 +13,26 @@
         <div class="form-group col-md-12">
             <label class="col-md-12">Time</label>
             <div class="col-md-12">
-                <input type="text" class="form-control" ng-model="$ctrl.addTask.time">
+                <!--<input type="text" class="form-control" ng-model="$ctrl.addTask.time">-->
+
+                <input type="time" class="form-control" placeholder="HH:mm" min="00:00" max="24:00" ng-model="$ctrl.addTask.time" ng-model-options="{timezone: 'UTC'}" required>
             </div>
         </div>
         <div class="form-group col-md-12">
             <label class="col-md-12">Cost</label>
             <div class="col-md-12">
                 <input type="text" class="form-control" ng-model="$ctrl.addTask.cost">
+            </div>
+        </div>
+        <div class="form-group col-md-12">
+            <label class="col-md-12">Status</label>
+            <div class="col-md-12">
+                <select class="form-control" name="status" ng-model="$ctrl.addTask.status">
+                    <option value="">Please select</option>
+                    <option value="open" ng-selected="">Open</option>
+                    <option value="progress">Progress</option>
+                    <option value="close">Close</option>
+                </select>
             </div>
         </div>
         <div class="form-group col-md-12">
