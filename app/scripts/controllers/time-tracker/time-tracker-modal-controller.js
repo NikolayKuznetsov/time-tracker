@@ -9,6 +9,8 @@ var TimeTrackerModalCtrl = function ($uibModalInstance, TimeTrackerService, data
     ttm.valuesAdd = [];
     ttm.id = data ? data.id : null;
 
+    console.log(ttm.values);
+
     /*
      * Validation from create task
      * */
@@ -22,7 +24,7 @@ var TimeTrackerModalCtrl = function ($uibModalInstance, TimeTrackerService, data
      *  Add new task for list and LocalStorage
      * */
     ttm.addNewTask = function () {
-        ttm.addValuesArray(ttm.addTask.name, ttm.addTask.time, ttm.addTask.message, ttm.addTask.cost);
+        ttm.addValuesArray(ttm.values.length, ttm.addTask.name, ttm.addTask.time, ttm.addTask.message, ttm.addTask.cost);
 
         TimeTrackerService.addValueLocalStorage(ttm.valuesAdd);
         // Clean form
@@ -34,8 +36,29 @@ var TimeTrackerModalCtrl = function ($uibModalInstance, TimeTrackerService, data
     /*
      * Add value for array values
      * */
-    ttm.addValuesArray = function (title, time, message, cost) {
-        ttm.valuesAdd = [{'id': ttm.values.length + 1, 'name': title, 'time': time, 'message': message, 'cost': cost}];
+    ttm.addValuesArray = function (id, name, time, message, cost) {
+        ttm.addValuesJSON(id, name, time, message, cost);
+        ttm.valuesAdd = [ttm.valuesAdd];
+    };
+
+    /*
+     * Add value for JSON values
+     * */
+    ttm.addValuesJSON = function (id, name, time, message, cost) {
+        ttm.valuesAdd = {'id': id, 'name': name, 'time': time, 'message': message, 'cost': cost};
+    };
+
+    /*
+     *  Edit task for list and LocalStorage
+     * */
+    ttm.editTask = function (id) {
+        ttm.addValuesJSON(id, ttm.addTask.name, ttm.addTask.time, ttm.addTask.message, ttm.addTask.cost);
+        ttm.values[id] = ttm.valuesAdd;
+        TimeTrackerService.updateValueLocalStorage(ttm.values);
+        // Clean form
+        ttm.cleanForm();
+        $uibModalInstance.close();
+        ttm.getValue();
     };
 
     /*

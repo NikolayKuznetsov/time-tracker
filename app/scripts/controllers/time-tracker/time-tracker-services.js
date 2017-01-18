@@ -25,6 +25,18 @@ var TimeTrackerService = function (LocalStorageService) {
     };
 
     /*
+     *  Update tasks for LocalStorage
+     * */
+    tts.updateValueLocalStorage = function (jsonValues) {
+        // remove all task for LocalStorage
+        tts.removeValue();
+
+        tts.values = jsonValues;
+
+        LocalStorageService.setObject(tts.KEY_LOCAL_TIME_TRACKER, tts.values);
+    };
+
+    /*
      *  Remove all tasks with LocalStorage
      * */
     tts.removeValue = function () {

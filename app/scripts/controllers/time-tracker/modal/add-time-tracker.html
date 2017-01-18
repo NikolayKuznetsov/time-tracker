@@ -35,10 +35,17 @@
         <div class="col-md-12 text-center">
             <button class="btn btn-success"
                     type="submit"
+                    ng-if="!$ctrl.id"
                     ng-disabled="$ctrl.validationForm()"
                     data-dismiss="modal"
                     ng-click="$ctrl.addNewTask()">
                 Add
+            </button>
+            <button class="btn btn-success"
+                    type="submit"
+                    ng-if="$ctrl.id"
+                    ng-click="$ctrl.editTask($ctrl.id)">
+                Edit
             </button>
         </div>
     </div>
