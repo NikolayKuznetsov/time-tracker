@@ -2,7 +2,7 @@
   {
     "id": 0,
     "name": "Task #1",
-    "time": 120,
+    "time": 240,
     "message": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae, vel.",
     "cost": 120,
     "status": "open",
@@ -20,7 +20,7 @@
   {
     "id": 2,
     "name": "Task #3",
-    "time": 361,
+    "time": 360,
     "message": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae, vel.",
     "cost": 17.5,
     "status": "progress",
@@ -29,7 +29,7 @@
   {
     "id": 3,
     "name": "Task #4",
-    "time": 98,
+    "time": 480,
     "message": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae, vel.",
     "cost": 100,
     "status": "open",
