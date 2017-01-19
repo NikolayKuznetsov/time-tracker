@@ -7,8 +7,8 @@ var ReportTimeTrackerCtrl = function (TimeTrackerService) {
      * Function init controller
      * */
     rtt.initReportTimeTrackerCtrl = function () {
-        // TimeTrackerService.getValue();
-        // rtt.getValue();
+        TimeTrackerService.getValue();
+        rtt.getValue();
     };
 
     /*
@@ -19,13 +19,16 @@ var ReportTimeTrackerCtrl = function (TimeTrackerService) {
     };
 
     rtt.getReportCost = function () {
-        var sum = 0;
+        rtt.getValue();
 
-        for (var i = 0; i < rtt.values.length; i++) {
-            sum += rtt.values[i].cost * (rtt.values[i].time / 3600)
+        var sum = 0;
+        if (rtt.values !== null) {
+            for (var i = 0; i < rtt.values.length; i++) {
+                sum += rtt.values[i].cost * (rtt.values[i].time / 3600)
+            }
         }
 
-       console.log(sum);
+        return sum;
     };
 
     /*

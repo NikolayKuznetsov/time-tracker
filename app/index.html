@@ -51,6 +51,7 @@
         <div class="row">
             <div ng-controller="ReportTimeTrackerCtrl as reportTimeTracker">
                 <div ng-bind="'getReportCost: ' + reportTimeTracker.getReportCost()"></div>
+                <div ng-bind="reportTimeTracker.values.length"></div>
             </div>
         </div>
         <div class="row" ng-controller="TimeTrackerCtrl as timeTracker">

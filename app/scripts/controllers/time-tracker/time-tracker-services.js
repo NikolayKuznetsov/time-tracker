@@ -2,7 +2,7 @@ var TimeTrackerService = function (LocalStorageService) {
     var tts = this;
 
     tts.KEY_LOCAL_TIME_TRACKER = 'timeTrackerData';
-    tts.values = [];
+    tts.values = LocalStorageService.getObject(tts.KEY_LOCAL_TIME_TRACKER);
 
     /*
      *  Get all tasks with LocalStorage
@@ -56,7 +56,6 @@ var TimeTrackerService = function (LocalStorageService) {
 
     tts.getValue();
 
-    return tts;
 
 };
 
