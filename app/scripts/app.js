@@ -1,1 +1,1 @@
-angular.module('app', ['ui.bootstrap', 'angularMoment']);
+angular.module('app', ['ui.bootstrap', 'ui.router', 'angularMoment']);

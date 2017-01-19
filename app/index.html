@@ -36,6 +36,7 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
+                    <li><a ui-sref="timeTracker.report">Report</a></li>
                     <li><a href="#">Dashboard</a></li>
                     <li><a href="#">Settings</a></li>
                     <li><a href="#">Profile</a></li>
@@ -48,12 +49,9 @@
         </div>
     </nav>
     <div class="container-fluid">
-        <div class="row">
-            <div ng-controller="ReportTimeTrackerCtrl as reportTimeTracker">
-                <div ng-bind="'getReportCost: ' + reportTimeTracker.getReportCost()"></div>
-                <div ng-bind="reportTimeTracker.values.length"></div>
-            </div>
-        </div>
+
+        <div ui-view></div>
+
         <div class="row" ng-controller="TimeTrackerCtrl as timeTracker">
             <div class="col-md-6">
                 <div ng-init="timeTracker.initTimeTrackerCtrl()">
@@ -155,6 +153,7 @@
 
 <!-- build:js scripts/vendor.min.js -->
 <script src="libs/angular/angular.min.js"></script>
+<script src="libs/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="libs/jquery/dist/jquery.min.js"></script>
 <script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="libs/angular-bootstrap/ui-bootstrap.min.js"></script>
@@ -166,6 +165,8 @@
 
 <!-- build:js scripts/app.min.js -->
 <script src="scripts/app.js"></script>
+
+<script src="scripts/shared/config/router-config.js"></script>
 
 <script src="scripts/shared/services/local-storage-service.js"></script>
 
