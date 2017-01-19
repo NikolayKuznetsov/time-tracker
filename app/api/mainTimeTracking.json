@@ -2,7 +2,7 @@
   {
     "id": 0,
     "name": "Task #1",
-    "time": 240,
+    "time": 3600,
     "message": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae, vel.",
     "cost": 120,
     "status": "open",
@@ -11,7 +11,7 @@
   {
     "id": 1,
     "name": "Task #2",
-    "time": 240,
+    "time": 5400,
     "message": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae, vel.",
     "cost": 60,
     "status": "close",
@@ -20,7 +20,7 @@
   {
     "id": 2,
     "name": "Task #3",
-    "time": 360,
+    "time": 3600,
     "message": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae, vel.",
     "cost": 17.5,
     "status": "progress",
@@ -29,7 +29,7 @@
   {
     "id": 3,
     "name": "Task #4",
-    "time": 480,
+    "time": 5400,
     "message": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae, vel.",
     "cost": 100,
     "status": "open",
@@ -38,7 +38,7 @@
   {
     "id": 4,
     "name": "Task #5",
-    "time": 1020,
+    "time": 9000,
     "message": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae, vel.",
     "cost": 13,
     "status": "open",
