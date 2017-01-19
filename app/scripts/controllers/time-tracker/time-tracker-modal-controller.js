@@ -1,6 +1,6 @@
 var TimeTrackerModalCtrl = function ($uibModalInstance, TimeTrackerService, data, moment, $filter) {
     var ttm = this;
-    var dateEdit = data ? new Date(data.time * 1000) : 0;
+    var dateEdit = data ? new Date(data.time * 1000) : undefined;
     ttm.addTask = {};
     ttm.addTask.name = data ? data.name : '';
     ttm.addTask.time = data ? new Date(dateEdit.getUTCFullYear(), dateEdit.getUTCMonth(), dateEdit.getUTCDate(), dateEdit.getUTCHours(), dateEdit.getUTCMinutes(), dateEdit.getUTCSeconds()) : '';

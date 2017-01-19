@@ -48,6 +48,11 @@
         </div>
     </nav>
     <div class="container-fluid">
+        <div class="row">
+            <div ng-controller="ReportTimeTrackerCtrl as reportTimeTracker">
+                <div ng-bind="'getReportCost: ' + reportTimeTracker.getReportCost()"></div>
+            </div>
+        </div>
         <div class="row" ng-controller="TimeTrackerCtrl as timeTracker">
             <div class="col-md-6">
                 <div ng-init="timeTracker.initTimeTrackerCtrl()">
@@ -168,6 +173,8 @@
 <script src="scripts/controllers/time-tracker/time-tracker-controller.js"></script>
 <script src="scripts/controllers/time-tracker/time-tracker-modal-controller.js"></script>
 <script src="scripts/controllers/time-tracker/time-tracker-services.js"></script>
+
+<script src="scripts/controllers/time-tracker/report/report-time-tracker-controller.js"></script>
 <!-- endbuild -->
 
 </body>

@@ -54,6 +54,8 @@ var TimeTrackerService = function (LocalStorageService) {
         LocalStorageService.setObject(tts.KEY_LOCAL_TIME_TRACKER, tts.values);
     };
 
+    tts.getValue();
+
     return tts;
 
 };
