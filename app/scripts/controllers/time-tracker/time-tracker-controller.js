@@ -1,7 +1,6 @@
-var TimeTrackerCtrl = function (LocalStorageService, TimeTrackerService, $q, $http, $timeout, $uibModal) {
+var TimeTrackerCtrl = function (TimeTrackerService, $q, $http, $timeout, $uibModal) {
     var tt = this;
 
-    tt.KEY_LOCAL_TIME_TRACKER = 'timeTrackerData';
     tt.JSON_LOCAL_TIME_TRACKER = null;
     tt.title = 'Time tracker';
 
@@ -164,5 +163,5 @@ var TimeTrackerCtrl = function (LocalStorageService, TimeTrackerService, $q, $ht
 
 };
 
-TimeTrackerCtrl.$inject = ['LocalStorageService', 'TimeTrackerService', '$q', '$http', '$timeout', '$uibModal'];
+TimeTrackerCtrl.$inject = ['TimeTrackerService', '$q', '$http', '$timeout', '$uibModal'];
 angular.module('app').controller('TimeTrackerCtrl', TimeTrackerCtrl);
