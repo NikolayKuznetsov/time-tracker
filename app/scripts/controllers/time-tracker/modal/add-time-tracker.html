@@ -1,6 +1,6 @@
 <div class="modal-header">
-    <h4 class="modal-title" ng-if="!$ctrl.id">Add task</h4>
-    <h4 class="modal-title" ng-if="$ctrl.id">Edit task #{{$ctrl.id}}</h4>
+    <h4 class="modal-title" ng-if="$ctrl.id < 0">Add task</h4>
+    <h4 class="modal-title" ng-if="$ctrl.id >= 0">Edit task #{{$ctrl.id}}</h4>
 </div>
 <div class="modal-body">
     <div class="form row">
@@ -13,8 +13,6 @@
         <div class="form-group col-md-12">
             <label class="col-md-12">Time</label>
             <div class="col-md-12">
-                <!--<input type="text" class="form-control" ng-model="$ctrl.addTask.time">-->
-
                 <input type="time" class="form-control" placeholder="HH:mm" min="00:00" max="08:00" ng-model="$ctrl.addTask.time" required>
             </div>
         </div>
@@ -48,7 +46,7 @@
         <div class="col-md-12 text-center">
             <button class="btn btn-success"
                     type="submit"
-                    ng-if="!$ctrl.id"
+                    ng-if="$ctrl.id < 0"
                     ng-disabled="$ctrl.validationForm()"
                     data-dismiss="modal"
                     ng-click="$ctrl.addNewTask()">
@@ -56,7 +54,7 @@
             </button>
             <button class="btn btn-success"
                     type="submit"
-                    ng-if="$ctrl.id"
+                    ng-if="$ctrl.id >= 0"
                     ng-click="$ctrl.editTask($ctrl.id)">
                 Edit
             </button>

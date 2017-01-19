@@ -89,8 +89,16 @@
                             </tbody>
                         </table>
 
-                        <button ng-click="timeTracker.generationValue()">click generation</button>
-                        <button ng-click="timeTracker.removeValue()">click remove</button>
+                        <div class="" ng-if="timeTracker.devProgress">
+                            <button class="btn btn-primary"
+                                    ng-click="timeTracker.generationValue()">
+                                click generation
+                            </button>
+                            <button class="btn btn-danger"
+                                    ng-click="timeTracker.removeValue()">
+                                click remove
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -123,7 +131,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12" ng-if="false">
                 <h3 ng-bind="timeTracker.timeCounter"></h3>
                 <button class="btn btn-primary"
                         ng-disabled="timeTracker.btnStartTimer"

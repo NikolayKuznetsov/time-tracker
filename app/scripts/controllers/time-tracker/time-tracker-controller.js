@@ -9,6 +9,7 @@ var TimeTrackerCtrl = function (LocalStorageService, TimeTrackerService, $q, $ht
 
     tt.timeCounter = 0;
     tt.btnStartTimer = false;
+    tt.devProgress = true;
     var timer = true;
 
     /*

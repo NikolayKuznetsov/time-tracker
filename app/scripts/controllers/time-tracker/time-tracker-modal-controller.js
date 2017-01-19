@@ -9,7 +9,7 @@ var TimeTrackerModalCtrl = function ($uibModalInstance, TimeTrackerService, data
     ttm.addTask.status = data ? data.status : '';
     ttm.values = TimeTrackerService.values;
     ttm.valuesAdd = [];
-    ttm.id = data ? data.id : null;
+    ttm.id = data ? data.id : -1;
 
     /*
      * Validation from create task
