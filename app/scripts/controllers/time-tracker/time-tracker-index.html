@@ -1,0 +1,96 @@
+<div class="row" ng-controller="TimeTrackerCtrl as timeTracker">
+    <div class="col-md-6">
+        <div ng-init="timeTracker.initTimeTrackerCtrl()">
+            <h2 ng-bind="timeTracker.title"></h2>
+            <div>
+                <table class="table table--task">
+                    <thead>
+                    <tr>
+                        <th class="index">Index</th>
+                        <th class="name">Name</th>
+                        <th class="time">Time</th>
+                        <th class="cost">Cost</th>
+                        <th class="status">Status</th>
+                        <th class="message">Message</th>
+                        <th class="data-create">dateCreate</th>
+                        <th class="action">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="value in timeTracker.values track by $index">
+                        <td class="index" ng-bind="value.id"></td>
+                        <td class="name" ng-bind="value.name"></td>
+                        <td class="time" ng-bind="timeTracker.timeFormat(value.time)"></td>
+                        <td class="cost" ng-bind="value.cost"></td>
+                        <td class="status" ng-bind="value.status"></td>
+                        <td class="message" ng-bind="value.message"></td>
+                        <td class="data-create" ng-bind="value.dateCreate | date:'dd-MM-yyyy HH:mm'"></td>
+                        <td class="action">
+                            <button class="btn btn-danger"
+                                    ng-click="timeTracker.removeTask($index)">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </button>
+                            <button class="btn btn-default"
+                                    ng-click="timeTracker.editTask($index)">
+                                <i class="glyphicon glyphicon-pencil"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="" ng-if="timeTracker.devProgress">
+                    <button class="btn btn-primary"
+                            ng-click="timeTracker.generationValue()">
+                        click generation
+                    </button>
+                    <button class="btn btn-danger"
+                            ng-click="timeTracker.removeValue()">
+                        click remove
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h2>Action</h2>
+        <button type="button" class="btn btn-default" ng-click="timeTracker.openModalAddTask('sm')">
+            Add task
+        </button>
+
+        <div class="panel panel-default" ng-if="false">
+            <div class="panel-body">
+                <ul class="list-unstyled timeline widget">
+                    <li ng-repeat="n in [1,2,3,4]">
+                        <div class="block">
+                            <div class="block_content">
+                                <h2 class="title">
+                                    <a>Who Needs Sundance When You’ve Got Crowdfunding?</a>
+                                </h2>
+                                <div class="byline">
+                                    <span>13 hours ago</span> by <a>Jane Smith</a>
+                                </div>
+                                <p class="excerpt">Film festivals used to be do-or-die moments for movie makers.
+                                    They were where you met the producers that could fund your project, and if
+                                    the buyers liked your flick, they’d pay to Fast-forward and… <a>Read&nbsp;More</a>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12" ng-if="false">
+        <h3 ng-bind="timeTracker.timeCounter"></h3>
+        <button class="btn btn-primary"
+                ng-disabled="timeTracker.btnStartTimer"
+                ng-click="timeTracker.startCounter()">startCounter
+        </button>
+
+        <button class="btn btn-danger"
+                ng-disabled="!timeTracker.btnStartTimer"
+                ng-click="timeTracker.stopCounter()">stopCounter
+        </button>
+    </div>
+</div>
