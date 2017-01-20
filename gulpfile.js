@@ -14,6 +14,8 @@ var webserver = require('gulp-webserver');
 gulp.task('server-run', function () {
     gulp.src('./app')
         .pipe(webserver({
+            // path: 'app',
+            fallback: 'index.html',
             port: 9001,
             livereload: true,
             directoryListing: {
