@@ -1,12 +1,23 @@
-<div class="row">
-    <div ng-controller="ReportTimeTrackerCtrl as reportTimeTracker">
-        <select class="form-control" name="status" ng-model="test.status">
-            <option value="">Please select</option>
-            <option value="open">Open</option>
-            <option value="progress">Progress</option>
-            <option value="close">Close</option>
-        </select>
-        <div ng-bind="'getReportCost: ' + reportTimeTracker.getReportCost(test.status)"></div>
-        <div ng-bind="'Count task:' + reportTimeTracker.values.length"></div>
+<div class="row" ng-controller="ReportTimeTrackerCtrl as reportTimeTracker">
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-stats"></i></span>
+                    <select class="form-control" name="status" ng-model="test.status">
+                        <option value="">Please select</option>
+                        <option value="open">Open</option>
+                        <option value="progress">Progress</option>
+                        <option value="close">Close</option>
+                    </select>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div ng-bind="'getReportCost: ' + reportTimeTracker.getReportCost(test.status)"></div>
+            </div>
+            <div class="panel-footer">
+                <div ng-bind="'Count task: ' + reportTimeTracker.values.length"></div>
+            </div>
+        </div>
     </div>
 </div>

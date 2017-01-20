@@ -20,7 +20,10 @@
                     <tr ng-repeat="value in timeTracker.values track by $index">
                         <td class="index" ng-bind="value.id"></td>
                         <td class="name" ng-bind="value.name"></td>
-                        <td class="time" ng-bind="timeTracker.timeFormat(value.time)"></td>
+                        <td class="time">
+                            <i class="glyphicon glyphicon-time"></i>
+                            <span ng-bind="timeTracker.timeFormat(value.time)"></span>
+                        </td>
                         <td class="cost" ng-bind="value.cost"></td>
                         <td class="status" ng-bind="value.status"></td>
                         <td class="message" ng-bind="value.message"></td>
