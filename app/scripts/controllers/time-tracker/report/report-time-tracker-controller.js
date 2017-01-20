@@ -25,7 +25,6 @@ var ReportTimeTrackerCtrl = function (TimeTrackerService) {
         if (rtt.values !== null) {
             for (var i = 0; i < rtt.values.length; i++) {
                 if (rtt.values[i].status === status) {
-                    console.log(rtt.values[i].time / 3600);
                     sum += rtt.values[i].cost * (rtt.values[i].time / 3600)
                 }
             }

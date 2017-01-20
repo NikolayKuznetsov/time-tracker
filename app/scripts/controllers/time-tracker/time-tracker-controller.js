@@ -1,4 +1,4 @@
-var TimeTrackerCtrl = function (TimeTrackerService, $q, $http, $timeout, $uibModal) {
+var TimeTrackerCtrl = function ($scope, TimeTrackerService, $q, $http, $timeout, $uibModal) {
     var tt = this;
 
     tt.JSON_LOCAL_TIME_TRACKER = null;
@@ -7,8 +7,10 @@ var TimeTrackerCtrl = function (TimeTrackerService, $q, $http, $timeout, $uibMod
     tt.values = TimeTrackerService.values;
 
     tt.timeCounter = 0;
-    tt.btnStartTimer = false;
+    tt.btnStartTask = [];
+    tt.btnDisableStartTimeTracker = true;
     tt.devProgress = true;
+    tt.editTimeTaskID = 0;
     var timer = true;
 
     /*
@@ -65,16 +67,38 @@ var TimeTrackerCtrl = function (TimeTrackerService, $q, $http, $timeout, $uibMod
     };
 
     /*
+     *  Start timer time tasks
+     * */
+    tt.startTimerTask = function (id) {
+        tt.btnDisableStartTimeTracker = false;
+        tt.btnStartTask[id] = true;
+        tt.startCounter(id);
+
+    };
+
+    /*
+     *  Stop timer time tasks
+     * */
+    tt.stopTimerTask = function (id) {
+        tt.editTimeTaskID = id;
+        tt.btnDisableStartTimeTracker = true;
+        tt.btnStartTask[id] = false;
+        tt.stopCounter();
+        // method update task for LocalStorage
+        TimeTrackerService.updateValueLocalStorage(tt.values);
+
+        tt.timeCounter = 0;
+    };
+
+    /*
      * Start: Counter task
      * */
     tt.startCounter = function () {
         if (timer != null) {
             tt.updateCounter();
-            tt.btnStartTimer = true;
         } else {
             timer = 0;
             tt.updateCounter();
-            tt.btnStartTimer = true;
         }
     };
 
@@ -83,7 +107,6 @@ var TimeTrackerCtrl = function (TimeTrackerService, $q, $http, $timeout, $uibMod
      * */
     tt.stopCounter = function () {
         $timeout.cancel(timer);
-        tt.btnStartTimer = false;
         timer = null;
     };
 
@@ -92,6 +115,7 @@ var TimeTrackerCtrl = function (TimeTrackerService, $q, $http, $timeout, $uibMod
      * */
     tt.updateCounter = function () {
         tt.timeCounter++;
+        tt.values[tt.editTimeTaskID].time += 1;
         timer = $timeout(tt.startCounter, 1000);
     };
 
@@ -163,5 +187,5 @@ var TimeTrackerCtrl = function (TimeTrackerService, $q, $http, $timeout, $uibMod
 
 };
 
-TimeTrackerCtrl.$inject = ['TimeTrackerService', '$q', '$http', '$timeout', '$uibModal'];
+TimeTrackerCtrl.$inject = ['$scope', 'TimeTrackerService', '$q', '$http', '$timeout', '$uibModal'];
 angular.module('app').controller('TimeTrackerCtrl', TimeTrackerCtrl);

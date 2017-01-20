@@ -1,5 +1,5 @@
 <div class="row" ng-controller="TimeTrackerCtrl as timeTracker">
-    <div class="col-md-6">
+    <div class="col-md-9">
         <div ng-init="timeTracker.initTimeTrackerCtrl()">
             <h2 ng-bind="timeTracker.title"></h2>
             <div>
@@ -25,17 +25,32 @@
                             <span ng-bind="timeTracker.timeFormat(value.time)"></span>
                         </td>
                         <td class="cost" ng-bind="value.cost"></td>
-                        <td class="status" ng-bind="value.status"></td>
+                        <td class="status">
+                            <span class="label label-default"
+                                  ng-class="{'label-danger' : value.status == 'close', 'label-primary' : value.status == 'progress'}"
+                                  ng-bind="value.status"></span>
+                        </td>
                         <td class="message" ng-bind="value.message"></td>
                         <td class="data-create" ng-bind="value.dateCreate | date:'dd-MM-yyyy HH:mm'"></td>
                         <td class="action">
-                            <button class="btn btn-danger"
-                                    ng-click="timeTracker.removeTask($index)">
+                            <button class="btn btn-danger btn-sm"
+                                    ng-click="timeTracker.removeTask(value.id)">
                                 <i class="glyphicon glyphicon-trash"></i>
                             </button>
-                            <button class="btn btn-default"
-                                    ng-click="timeTracker.editTask($index)">
+                            <button class="btn btn-default btn-sm"
+                                    ng-click="timeTracker.editTask(value.id)">
                                 <i class="glyphicon glyphicon-pencil"></i>
+                            </button>
+                            <button class="btn btn-success btn-sm"
+                                    ng-if="!timeTracker.btnStartTask[value.id]"
+                                    ng-disabled="!timeTracker.btnDisableStartTimeTracker"
+                                    ng-click="timeTracker.startTimerTask(value.id)">
+                                <i class="glyphicon glyphicon-play"></i>
+                            </button>
+                            <button class="btn btn-danger btn-sm"
+                                    ng-if="timeTracker.btnStartTask[value.id]"
+                                    ng-click="timeTracker.stopTimerTask(value.id)">
+                                <i class="glyphicon glyphicon-stop"></i>
                             </button>
                         </td>
                     </tr>
@@ -55,7 +70,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-3">
         <h2>Action</h2>
         <button type="button" class="btn btn-default" ng-click="timeTracker.openModalAddTask('sm')">
             Add task
@@ -83,17 +98,5 @@
                 </ul>
             </div>
         </div>
-    </div>
-    <div class="col-md-12" ng-if="false">
-        <h3 ng-bind="timeTracker.timeCounter"></h3>
-        <button class="btn btn-primary"
-                ng-disabled="timeTracker.btnStartTimer"
-                ng-click="timeTracker.startCounter()">startCounter
-        </button>
-
-        <button class="btn btn-danger"
-                ng-disabled="!timeTracker.btnStartTimer"
-                ng-click="timeTracker.stopCounter()">stopCounter
-        </button>
     </div>
 </div>
