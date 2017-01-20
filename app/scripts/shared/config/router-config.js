@@ -1,5 +1,5 @@
-var uiRouter = function ($stateProvider, $urlRouterProvider) {
-
+var uiRouter = function ($stateProvider, $urlRouterProvider, $locationProvider) {
+    $locationProvider.hashPrefix('');
     $stateProvider
         .state('index', {
             url: '/',
@@ -13,5 +13,5 @@ var uiRouter = function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
 };
 
-uiRouter.$inject = ['$stateProvider', '$urlRouterProvider'];
+uiRouter.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
 angular.module('app').config(uiRouter);
