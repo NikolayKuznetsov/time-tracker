@@ -1,5 +1,4 @@
 var gulp = require('gulp');
-var server = require('gulp-server-livereload');
 var sass = require('gulp-sass');
 var prefix = require('gulp-autoprefixer');
 
@@ -9,13 +8,18 @@ var gulpif = require('gulp-if');
 var uglify = require('gulp-uglify');
 var cleanDest = require('gulp-clean-dest');
 
+var webserver = require('gulp-webserver');
+
 //SERVER
 gulp.task('server-run', function () {
     gulp.src('./app')
-        .pipe(server({
+        .pipe(webserver({
             port: 9001,
             livereload: true,
-            defaultFile: 'index.html',
+            directoryListing: {
+                enable: true,
+                path: 'app/index.html'
+            },
             open: true
         }));
 });
