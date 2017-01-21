@@ -73,6 +73,7 @@ var TimeTrackerCtrl = function ($scope, TimeTrackerService, $q, $http, $timeout,
         tt.btnDisableStartTimeTracker = false;
         tt.btnStartTask[id] = true;
         tt.editTimeTaskID = id;
+        tt.updateStatusTaskCounter(id);
         tt.startCounter(id);
     };
 
@@ -83,6 +84,7 @@ var TimeTrackerCtrl = function ($scope, TimeTrackerService, $q, $http, $timeout,
         tt.btnDisableStartTimeTracker = true;
         tt.btnStartTask[id] = false;
         tt.stopCounter();
+        tt.updateStatusTaskCounter(id);
         // method update task for LocalStorage
         TimeTrackerService.updateValueLocalStorage(tt.values);
         tt.timeCounter = 0;
@@ -115,6 +117,14 @@ var TimeTrackerCtrl = function ($scope, TimeTrackerService, $q, $http, $timeout,
         tt.timeCounter++;
         tt.values[tt.editTimeTaskID].time += 1;
         timer = $timeout(tt.startCounter, 1000);
+    };
+
+
+    /*
+     * Update: Status task counter
+     * */
+    tt.updateStatusTaskCounter = function (id) {
+        tt.values[id].status = (tt.values[id].status === 'open') ? 'progress' : 'progress';
     };
 
     /*
