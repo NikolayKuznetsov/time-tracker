@@ -24,7 +24,8 @@ var TimeTrackerModalCtrl = function ($uibModalInstance, TimeTrackerService, data
      *  Add new task for list and LocalStorage
      * */
     ttm.addNewTask = function () {
-        ttm.addValuesArray(ttm.values.length, ttm.addTask.name, ttm.convertDateToSeconds(ttm.addTask.time), ttm.addTask.message, ttm.addTask.cost, ttm.addTask.status, new Date());
+
+        ttm.addValuesArray(ttm.values == null ? 0 : ttm.values.length, ttm.addTask.name, ttm.convertDateToSeconds(ttm.addTask.time), ttm.addTask.message, ttm.addTask.cost, ttm.addTask.status, new Date());
 
         TimeTrackerService.addValueLocalStorage(ttm.valuesAdd);
         // Clean form
