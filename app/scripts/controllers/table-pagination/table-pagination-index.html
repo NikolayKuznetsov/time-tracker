@@ -1,0 +1,23 @@
+<div ng-controller="TablePaginationCtrl as ctrl">
+    <table class="table">
+        <tr ng-repeat="row in ctrl.data.slice(((ctrl.currentPage - 1) * ctrl.itemsPerPage), ((ctrl.currentPage) * ctrl.itemsPerPage))">
+            <td>{{row.name}}</td>
+            <td>{{row.id}}</td>
+        </tr>
+    </table>
+    View <select ng-model="viewby" ng-change="ctrl.setItemsPerPage(viewby)">
+    <option>3</option>
+    <option>5</option>
+    <option>10</option>
+    <option>20</option>
+    <option>30</option>
+    <option>40</option>
+    <option>50</option>
+</select> records at a time.
+
+    <ul uib-pagination class="pagination-sm"
+        total-items="ctrl.totalItems"
+        ng-model="ctrl.currentPage"
+        ng-change="ctrl.pageChanged()"
+        items-per-page="ctrl.itemsPerPage"></ul>
+</div>

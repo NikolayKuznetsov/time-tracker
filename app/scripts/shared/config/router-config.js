@@ -15,6 +15,10 @@ angular.module('app').config(function ($stateProvider, $urlRouterProvider, $loca
         .state('timeTrackerReport', {
             url: '/time-tracker-report',
             templateUrl: 'scripts/controllers/time-tracker/report/report-time-tracker-index.html'
+        })
+        .state('tablePagination', {
+            url: '/table-pagination',
+            templateUrl: 'scripts/controllers/table-pagination/table-pagination-index.html'
         });
 
     $locationProvider.html5Mode(true);
