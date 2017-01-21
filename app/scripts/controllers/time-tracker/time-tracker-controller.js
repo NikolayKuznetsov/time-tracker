@@ -72,21 +72,19 @@ var TimeTrackerCtrl = function ($scope, TimeTrackerService, $q, $http, $timeout,
     tt.startTimerTask = function (id) {
         tt.btnDisableStartTimeTracker = false;
         tt.btnStartTask[id] = true;
+        tt.editTimeTaskID = id;
         tt.startCounter(id);
-
     };
 
     /*
      *  Stop timer time tasks
      * */
     tt.stopTimerTask = function (id) {
-        tt.editTimeTaskID = id;
         tt.btnDisableStartTimeTracker = true;
         tt.btnStartTask[id] = false;
         tt.stopCounter();
         // method update task for LocalStorage
         TimeTrackerService.updateValueLocalStorage(tt.values);
-
         tt.timeCounter = 0;
     };
 
