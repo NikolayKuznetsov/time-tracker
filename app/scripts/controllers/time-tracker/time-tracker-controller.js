@@ -9,7 +9,7 @@ var TimeTrackerCtrl = function ($scope, TimeTrackerService, $q, $http, $timeout,
     tt.timeCounter = 0;
     tt.btnStartTask = [];
     tt.btnDisableStartTimeTracker = true;
-    tt.devProgress = true;
+    tt.devProgress = false;
     tt.editTimeTaskID = 0;
     var timer = true;
 
