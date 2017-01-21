@@ -56,7 +56,7 @@ gulp.task('build-fonts', function () {
 });
 
 //BUILD js and css
-gulp.task('build:app', function () {
+gulp.task('build-app', function () {
     return gulp.src('./app/*.html')
         .pipe(useref())
         .pipe(gulpif('*.css', csso()))
@@ -65,7 +65,7 @@ gulp.task('build:app', function () {
 
 //BUILD
 gulp.task('build', ['clean'], function () {
-    gulp.start('build-fonts', 'build:app');
+    gulp.start('build-fonts', 'build-app');
 });
 
 
