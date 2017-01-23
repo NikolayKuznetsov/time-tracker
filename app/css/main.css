@@ -105,6 +105,9 @@ ul.timeline li {
   min-width: 54px;
   max-width: 54px; }
 
+#pieReport {
+  width: 248px; }
+
 /* Table */
 table th.sort {
   cursor: pointer; }

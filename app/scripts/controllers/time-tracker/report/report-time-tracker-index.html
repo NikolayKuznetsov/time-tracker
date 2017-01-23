@@ -20,4 +20,43 @@
             </div>
         </div>
     </div>
+    <div class="row col-md-12">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="title">pieReport</div>
+                </div>
+                <div class="panel-body">
+                    <div class="chart-container" style="width:300px; height:300px; margin: 0 auto;">
+                        <canvas id="pieReport"
+                                class="chart chart-doughnut"
+                                chart-options="reportTimeTracker.chartPieOptions"
+                                chart-data="reportTimeTracker.chartPieCharts"
+                                chart-colors="reportTimeTracker.chartPieColours"
+                                chart-labels="reportTimeTracker.chartPieLabels">
+
+                        </canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="title">barReport</div>
+                </div>
+                <div class="panel-body">
+                    <div class="chart-container" style="width:500px; height:300px; margin: 0 auto;">
+                        <canvas id="barReport"
+                                class="chart chart-bar"
+                                chart-data="reportTimeTracker.chartBarData"
+                                chart-labels="reportTimeTracker.chartBarLabels"
+                                chart-series="reportTimeTracker.chartBarSeries"
+                                chart-colors="reportTimeTracker.chartPieColours">
+                        </canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
