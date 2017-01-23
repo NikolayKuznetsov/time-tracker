@@ -1,62 +1,92 @@
 <div class="row" ng-controller="TimeTrackerCtrl as timeTracker">
     <div class="col-md-9">
         <div ng-init="timeTracker.initTimeTrackerCtrl()">
-            <h2 ng-bind="timeTracker.title"></h2>
-            <div>
-                <table class="table table--task">
-                    <thead>
-                    <tr>
-                        <th class="index">Index</th>
-                        <th class="name">Name</th>
-                        <th class="time">Time</th>
-                        <th class="cost">Cost</th>
-                        <th class="status">Status</th>
-                        <th class="message">Message</th>
-                        <th class="data-create">dateCreate</th>
-                        <th class="action">Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="value in timeTracker.values track by $index">
-                        <td class="index" ng-bind="value.id"></td>
-                        <td class="name" ng-bind="value.name"></td>
-                        <td class="time">
-                            <i class="glyphicon glyphicon-time"></i>
-                            <span ng-bind="timeTracker.timeFormat(value.time)"></span>
-                        </td>
-                        <td class="cost" ng-bind="value.cost"></td>
-                        <td class="status">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="pull-left">
+                                <h2 ng-bind="timeTracker.title"></h2>
+                            </div>
+                            <div class="pull-right">
+                                <select class="form-control"
+                                        ng-model="tableLength"
+                                        ng-change="timeTracker.setItemsPerPage(tableLength)">
+                                    <option value="1">1</option>
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                    <option value="50">50</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <table class="table table--task">
+                        <thead>
+                        <tr>
+                            <th class="index sort" ng-click="timeTracker.sort('id')">ID</th>
+                            <th class="name sort" ng-click="timeTracker.sort('name')">Name</th>
+                            <th class="time sort" ng-click="timeTracker.sort('time')">Time</th>
+                            <th class="cost sort" ng-click="timeTracker.sort('cost')">Cost</th>
+                            <th class="status sort" ng-click="timeTracker.sort('status')">Status</th>
+                            <th class="message">Message</th>
+                            <th class="data-create sort" ng-click="timeTracker.sort('dateCreate')">dateCreate</th>
+                            <th class="action">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="value in timeTracker.dataTable = timeTracker.getDataTable() | orderBy:sortKey:reverse">
+                            <td class="index" ng-bind="value.id"></td>
+                            <td class="name" ng-bind="value.name"></td>
+                            <td class="time">
+                                <i class="glyphicon glyphicon-time"></i>
+                                <span ng-bind="timeTracker.timeFormat(value.time)"></span>
+                            </td>
+                            <td class="cost" ng-bind="value.cost"></td>
+                            <td class="status">
                             <span class="label label-default"
                                   ng-class="{'label-danger' : value.status == 'close', 'label-primary' : value.status == 'progress'}"
                                   ng-bind="value.status"></span>
-                        </td>
-                        <td class="message" ng-bind="value.message"></td>
-                        <td class="data-create" ng-bind="value.dateCreate | date:'dd-MM-yyyy HH:mm'"></td>
-                        <td class="action">
-                            <button class="btn btn-danger btn-sm"
-                                    ng-click="timeTracker.removeTask(value.id)">
-                                <i class="glyphicon glyphicon-trash"></i>
-                            </button>
-                            <button class="btn btn-default btn-sm"
-                                    ng-click="timeTracker.editTask(value.id)">
-                                <i class="glyphicon glyphicon-pencil"></i>
-                            </button>
-                            <button class="btn btn-success btn-sm"
-                                    ng-if="!timeTracker.btnStartTask[value.id]"
-                                    ng-disabled="!timeTracker.btnDisableStartTimeTracker"
-                                    ng-click="timeTracker.startTimerTask(value.id)">
-                                <i class="glyphicon glyphicon-play"></i>
-                            </button>
-                            <button class="btn btn-danger btn-sm"
-                                    ng-if="timeTracker.btnStartTask[value.id]"
-                                    ng-click="timeTracker.stopTimerTask(value.id)">
-                                <i class="glyphicon glyphicon-stop"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                            </td>
+                            <td class="message" ng-bind="value.message"></td>
+                            <td class="data-create" ng-bind="value.dateCreate | date:'dd-MM-yyyy HH:mm'"></td>
+                            <td class="action">
+                                <button class="btn btn-danger btn-sm"
+                                        ng-click="timeTracker.removeTask(value.id)">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                </button>
+                                <button class="btn btn-default btn-sm"
+                                        ng-click="timeTracker.editTask(value.id)">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </button>
+                                <button class="btn btn-success btn-sm"
+                                        ng-if="!timeTracker.btnStartTask[value.id]"
+                                        ng-disabled="!timeTracker.btnDisableStartTimeTracker"
+                                        ng-click="timeTracker.startTimerTask(value.id)">
+                                    <i class="glyphicon glyphicon-play"></i>
+                                </button>
+                                <button class="btn btn-danger btn-sm"
+                                        ng-if="timeTracker.btnStartTask[value.id]"
+                                        ng-click="timeTracker.stopTimerTask(value.id)">
+                                    <i class="glyphicon glyphicon-stop"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel-footer">
+                    <ul uib-pagination class="pagination-sd"
+                        total-items="timeTracker.totalItems"
+                        ng-model="timeTracker.currentPage"
+                        ng-change="timeTracker.pageChanged()"
+                        items-per-page="timeTracker.itemsPerPage"></ul>
+                </div>
+            </div>
 
+            <div>
                 <div class="" ng-if="timeTracker.devProgress">
                     <button class="btn btn-primary"
                             ng-click="timeTracker.generationValue()">

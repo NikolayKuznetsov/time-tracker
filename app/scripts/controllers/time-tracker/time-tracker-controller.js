@@ -2,7 +2,7 @@ var TimeTrackerCtrl = function ($scope, TimeTrackerService, $q, $http, $timeout,
     var tt = this;
 
     tt.JSON_LOCAL_TIME_TRACKER = null;
-    tt.title = 'Time tracker';
+    tt.title = 'List tasks';
 
     tt.values = TimeTrackerService.values;
 
@@ -12,6 +12,12 @@ var TimeTrackerCtrl = function ($scope, TimeTrackerService, $q, $http, $timeout,
     tt.devProgress = false;
     tt.editTimeTaskID = 0;
     var timer = true;
+
+    /* variables for pagination */
+    tt.tableLength = 5;
+    tt.currentPage = 1;
+    tt.totalItems = tt.values.length;
+    tt.itemsPerPage = tt.tableLength;
 
     /*
      * Function init controller
@@ -49,6 +55,7 @@ var TimeTrackerCtrl = function ($scope, TimeTrackerService, $q, $http, $timeout,
      * */
     tt.getValue = function () {
         tt.values = TimeTrackerService.values;
+        tt.updateDataTable();
     };
 
     /*
@@ -64,6 +71,7 @@ var TimeTrackerCtrl = function ($scope, TimeTrackerService, $q, $http, $timeout,
      * */
     tt.removeTask = function (id) {
         TimeTrackerService.removeTask(id);
+        tt.getValue();
     };
 
     /*
@@ -158,7 +166,6 @@ var TimeTrackerCtrl = function ($scope, TimeTrackerService, $q, $http, $timeout,
                 }
             }
         });
-
         modalInstance.result.then(function () {
             tt.getValue();
         }, function () {
@@ -187,6 +194,53 @@ var TimeTrackerCtrl = function ($scope, TimeTrackerService, $q, $http, $timeout,
             console.log('Modal dismissed at: ' + new Date());
         });
     };
+
+    /*
+     * Set number page pagination
+     * */
+    tt.setPage = function (number) {
+        tt.currentPage = number;
+    };
+
+    /*
+     * Change pagination item
+     * */
+    tt.pageChanged = function () {
+        console.log('Page changed to: ' + tt.currentPage);
+    };
+
+    /*
+     * Set count row tables
+     * */
+    tt.setItemsPerPage = function (number) {
+        tt.itemsPerPage = number;
+        tt.currentPage = 1; //reset to first page
+    };
+
+    /*
+     * Get data for table with pagination
+     * */
+    tt.getDataTable = function () {
+        return tt.values.slice(((tt.currentPage - 1) * tt.itemsPerPage), ((tt.currentPage) * tt.itemsPerPage));
+    };
+
+    /*
+     * Update data for table with pagination
+     * */
+    tt.updateDataTable = function () {
+        tt.dataTable = tt.getDataTable();
+        tt.totalItems = tt.values.length;
+        tt.itemsPerPage = tt.tableLength;
+    };
+
+    /*
+     * Sort table
+     * */
+    tt.sort = function (key) {
+        $scope.sortKey = key;   //set the sortKey to the param passed
+        $scope.reverse = !$scope.reverse; //if true make it false and vice versa
+    };
+
 
     /*
      * Init Time Tracker Controller

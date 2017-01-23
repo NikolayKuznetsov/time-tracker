@@ -28,6 +28,13 @@ ul.timeline li {
 
 
 /* Table */
+table {
+  th {
+    &.sort {
+      cursor: pointer;
+    }
+  }
+}
 .table--task {
   .index {
     width: 5%;
