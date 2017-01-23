@@ -101,6 +101,10 @@ ul.timeline li {
   border-bottom: 1px solid #e8e8e8;
   clear: both; }
 
+.items-per-page button, .items-per-page .dropdown-menu {
+  min-width: 54px;
+  max-width: 54px; }
+
 /* Table */
 table th.sort {
   cursor: pointer; }

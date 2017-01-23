@@ -9,15 +9,32 @@
                                 <h2 ng-bind="timeTracker.title"></h2>
                             </div>
                             <div class="pull-right">
-                                <select class="form-control"
-                                        ng-model="tableLength"
-                                        ng-change="timeTracker.setItemsPerPage(tableLength)">
-                                    <option value="1">1</option>
-                                    <option value="5">5</option>
-                                    <option value="10">10</option>
-                                    <option value="20">20</option>
-                                    <option value="50">50</option>
-                                </select>
+                                <div class="btn-group items-per-page" uib-dropdown is-open="status.isopen">
+                                    <button type="button"
+                                            class="btn btn-default"
+                                            uib-dropdown-toggle
+                                            ng-disabled="disabled">
+                                        <span ng-bind="timeTracker.itemsPerPage"></span>
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" uib-dropdown-menu role="menu">
+                                        <li>
+                                            <a ng-click="timeTracker.setItemsPerPage(1)">1</a>
+                                        </li>
+                                        <li>
+                                            <a ng-click="timeTracker.setItemsPerPage(5)">5</a>
+                                        </li>
+                                        <li>
+                                            <a ng-click="timeTracker.setItemsPerPage(10)">10</a>
+                                        </li>
+                                        <li>
+                                            <a ng-click="timeTracker.setItemsPerPage(20)">20</a>
+                                        </li>
+                                        <li>
+                                            <a ng-click="timeTracker.setItemsPerPage(50)">50</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -37,7 +54,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="value in timeTracker.dataTable = timeTracker.getDataTable() | orderBy:sortKey:reverse">
+                        <tr ng-repeat="value in timeTracker.dataTable = timeTracker.getDataTable() | orderBy:sortKey:reverse track by $index">
                             <td class="index" ng-bind="value.id"></td>
                             <td class="name" ng-bind="value.name"></td>
                             <td class="time">

@@ -26,6 +26,13 @@ ul.timeline li {
   clear: both;
 }
 
+.items-per-page {
+  button, .dropdown-menu {
+    min-width: 54px;
+    max-width: 54px;
+  }
+}
+
 
 /* Table */
 table {

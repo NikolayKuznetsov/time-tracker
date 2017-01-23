@@ -230,7 +230,7 @@ var TimeTrackerCtrl = function ($scope, TimeTrackerService, $q, $http, $timeout,
     tt.updateDataTable = function () {
         tt.dataTable = tt.getDataTable();
         tt.totalItems = tt.values.length;
-        tt.itemsPerPage = tt.tableLength;
+        tt.itemsPerPage = tt.itemsPerPage ? tt.itemsPerPage : tt.tableLength;
     };
 
     /*
@@ -240,7 +240,6 @@ var TimeTrackerCtrl = function ($scope, TimeTrackerService, $q, $http, $timeout,
         $scope.sortKey = key;   //set the sortKey to the param passed
         $scope.reverse = !$scope.reverse; //if true make it false and vice versa
     };
-
 
     /*
      * Init Time Tracker Controller
