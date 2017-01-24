@@ -29,7 +29,7 @@ var TimeTrackerService = function (LocalStorageService) {
      * */
     tts.updateValueLocalStorage = function (jsonValues) {
         // remove all task for LocalStorage
-        tts.removeValue();
+        // tts.removeValue();
 
         tts.values = jsonValues;
 
