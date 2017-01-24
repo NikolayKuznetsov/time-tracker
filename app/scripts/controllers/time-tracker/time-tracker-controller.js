@@ -10,7 +10,7 @@ var TimeTrackerCtrl = function (TimeTrackerService, $q, $http, $timeout, $uibMod
     vm.btnStartTask = [];
     vm.btnDisableStartTimeTracker = true;
     vm.devProgress = true;
-    vm.edivmimeTaskID = 0;
+    vm.editTimeTaskID = 0;
     var timer = true;
 
     /* variables for pagination */
@@ -80,7 +80,7 @@ var TimeTrackerCtrl = function (TimeTrackerService, $q, $http, $timeout, $uibMod
     vm.startTimerTask = function (id) {
         vm.btnDisableStartTimeTracker = false;
         vm.btnStartTask[id] = true;
-        vm.edivmimeTaskID = id;
+        vm.editTimeTaskID = id;
         vm.updateStatusTaskCounter(id);
         vm.startCounter(id);
     };
@@ -123,7 +123,7 @@ var TimeTrackerCtrl = function (TimeTrackerService, $q, $http, $timeout, $uibMod
      * */
     vm.updateCounter = function () {
         vm.timeCounter++;
-        TimeTrackerService.values[vm.edivmimeTaskID].time += 1;
+        TimeTrackerService.values[vm.editTimeTaskID].time += 1;
         timer = $timeout(vm.startCounter, 1000);
     };
 
