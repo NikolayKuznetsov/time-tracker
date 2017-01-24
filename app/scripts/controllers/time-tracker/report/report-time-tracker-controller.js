@@ -1,25 +1,23 @@
 var ReportTimeTrackerCtrl = function (TimeTrackerService) {
-    var rtt = this;
+    var vm = this;
 
     var STATUS_OPEN = 'open';
     var STATUS_PROGRESS = 'progress';
     var STATUS_CLOSE = 'close';
 
-    rtt.values = TimeTrackerService.values;
-
-    rtt.chartPieLabels = ["Open", "Progress", "Close"];
-    rtt.chartPieCharts = [];
-    rtt.chartPieOptions = {
+    vm.chartPieLabels = ["Open", "Progress", "Close"];
+    vm.chartPieCharts = [];
+    vm.chartPieOptions = {
         maintainAspectRatio: true,
         responsive: true
     };
-    rtt.chartPieColours = ["rgb(73,71,80)", "rgb(153,153,153)", "rgb(204,51,33)"];
+    vm.chartPieColours = ["rgb(73,71,80)", "rgb(153,153,153)", "rgb(204,51,33)"];
 
 
-    rtt.chartBarLabels = ['2016', '2017'];
-    rtt.chartBarSeries = rtt.chartPieLabels;
+    vm.chartBarLabels = ['2016', '2017'];
+    vm.chartBarSeries = vm.chartPieLabels;
 
-    rtt.chartBarData = [
+    vm.chartBarData = [
         [55, 40],
         [27, 90],
         [17, 40]
@@ -28,30 +26,19 @@ var ReportTimeTrackerCtrl = function (TimeTrackerService) {
     /*
      * Function init controller
      * */
-    rtt.initReportTimeTrackerCtrl = function () {
-        TimeTrackerService.getValue();
-        rtt.getValue();
-        rtt.setReportCost();
-    };
-
-    /*
-     *  Get all list tasks
-     * */
-    rtt.getValue = function () {
-        rtt.values = TimeTrackerService.values;
+    vm.initReportTimeTrackerCtrl = function () {
+        vm.setReportCost();
     };
 
     /*
      * Get value cost for status
      * */
-    rtt.getReportCost = function (status) {
-        rtt.getValue();
-
+    vm.getReportCost = function (status) {
         var sum = 0;
-        if (rtt.values !== null) {
-            for (var i = 0; i < rtt.values.length; i++) {
-                if (rtt.values[i].status === status) {
-                    sum += rtt.values[i].cost * (rtt.values[i].time / 3600)
+        if (TimeTrackerService.values !== null) {
+            for (var i = 0; i < TimeTrackerService.values.length; i++) {
+                if (TimeTrackerService.values[i].status === status) {
+                    sum += TimeTrackerService.values[i].cost * (TimeTrackerService.values[i].time / 3600)
                 }
             }
         }
@@ -62,17 +49,16 @@ var ReportTimeTrackerCtrl = function (TimeTrackerService) {
     /*
      * Set report cost
      * */
-    rtt.setReportCost = function () {
-        rtt.chartPieCharts[rtt.chartPieCharts.length] = rtt.getReportCost(STATUS_OPEN);
-        rtt.chartPieCharts[rtt.chartPieCharts.length] = rtt.getReportCost(STATUS_PROGRESS);
-        rtt.chartPieCharts[rtt.chartPieCharts.length] = rtt.getReportCost(STATUS_CLOSE);
+    vm.setReportCost = function () {
+        vm.chartPieCharts[vm.chartPieCharts.length] = vm.getReportCost(STATUS_OPEN);
+        vm.chartPieCharts[vm.chartPieCharts.length] = vm.getReportCost(STATUS_PROGRESS);
+        vm.chartPieCharts[vm.chartPieCharts.length] = vm.getReportCost(STATUS_CLOSE);
     };
-
 
     /*
      * Init Report Time Tracker Controller
      * */
-    rtt.initReportTimeTrackerCtrl();
+    vm.initReportTimeTrackerCtrl();
 
 
 };

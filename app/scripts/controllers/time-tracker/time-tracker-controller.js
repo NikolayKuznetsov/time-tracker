@@ -1,41 +1,41 @@
-var TimeTrackerCtrl = function ($scope, TimeTrackerService, $q, $http, $timeout, $uibModal) {
-    var tt = this;
+var TimeTrackerCtrl = function (TimeTrackerService, $q, $http, $timeout, $uibModal) {
+    var vm = this;
 
-    tt.JSON_LOCAL_TIME_TRACKER = null;
-    tt.title = 'List tasks';
+    vm.JSON_LOCAL_TIME_TRACKER = [];
+    vm.title = 'List tasks';
 
-    tt.values = TimeTrackerService.values;
+    // vm.values = TimeTrackerService.values;
 
-    tt.timeCounter = 0;
-    tt.btnStartTask = [];
-    tt.btnDisableStartTimeTracker = true;
-    tt.devProgress = true;
-    tt.editTimeTaskID = 0;
+    vm.timeCounter = 0;
+    vm.btnStartTask = [];
+    vm.btnDisableStartTimeTracker = true;
+    vm.devProgress = true;
+    vm.edivmimeTaskID = 0;
     var timer = true;
 
     /* variables for pagination */
-    tt.tableLength = 5;
-    tt.currentPage = 1;
-    tt.totalItems = tt.values === null ? 0 : tt.values.length;
-    tt.itemsPerPage = tt.tableLength;
+    vm.tableLength = 5;
+    vm.currentPage = 1;
+    vm.totalItems = TimeTrackerService.values === null ? 0 : TimeTrackerService.values.length;
+    vm.itemsPerPage = vm.tableLength;
 
     /*
      * Function init controller
      * */
-    tt.initTimeTrackerCtrl = function () {
-        tt.generationValueJson();
-        TimeTrackerService.getValue();
-        tt.getValue();
+    vm.initTimeTrackerCtrl = function () {
+        vm.generationValueJson();
+        // TimeTrackerService.getValue();
+        // vm.getValue();
     };
 
     /*
      * Generation Value JSON
      * */
-    tt.generationValueJson = function () {
+    vm.generationValueJson = function () {
         $http.get("/api/mainTimeTracking.json")
             .then(
                 function (response) {
-                    tt.JSON_LOCAL_TIME_TRACKER = response.data;
+                    vm.JSON_LOCAL_TIME_TRACKER = response.data;
                 },
                 function (error) {
                     console.log("The request failed: " + error);
@@ -45,75 +45,75 @@ var TimeTrackerCtrl = function ($scope, TimeTrackerService, $q, $http, $timeout,
     /*
      *  Generation tasks
      * */
-    tt.generationValue = function () {
-        TimeTrackerService.addValueLocalStorage(tt.JSON_LOCAL_TIME_TRACKER);
-        tt.getValue();
+    vm.generationValue = function () {
+        TimeTrackerService.addValueLocalStorage(vm.JSON_LOCAL_TIME_TRACKER);
+        vm.getValue();
     };
 
     /*
      *  Get all list tasks
      * */
-    tt.getValue = function () {
-        tt.values = TimeTrackerService.values;
-        tt.updateDataTable();
+    vm.getValue = function () {
+        // vm.values = TimeTrackerService.values;
+        vm.updateDataTable();
     };
 
     /*
      *  Remove all tasks with LocalStorage
      * */
-    tt.removeValue = function () {
+    vm.removeValue = function () {
         TimeTrackerService.removeValue();
-        tt.getValue();
+        vm.getValue();
     };
 
     /*
      *  Remove element from values tasks
      * */
-    tt.removeTask = function (id) {
+    vm.removeTask = function (id) {
         TimeTrackerService.removeTask(id);
-        tt.getValue();
+        vm.getValue();
     };
 
     /*
      *  Start timer time tasks
      * */
-    tt.startTimerTask = function (id) {
-        tt.btnDisableStartTimeTracker = false;
-        tt.btnStartTask[id] = true;
-        tt.editTimeTaskID = id;
-        tt.updateStatusTaskCounter(id);
-        tt.startCounter(id);
+    vm.startTimerTask = function (id) {
+        vm.btnDisableStartTimeTracker = false;
+        vm.btnStartTask[id] = true;
+        vm.edivmimeTaskID = id;
+        vm.updateStatusTaskCounter(id);
+        vm.startCounter(id);
     };
 
     /*
      *  Stop timer time tasks
      * */
-    tt.stopTimerTask = function (id) {
-        tt.btnDisableStartTimeTracker = true;
-        tt.btnStartTask[id] = false;
-        tt.stopCounter();
-        tt.updateStatusTaskCounter(id);
+    vm.stopTimerTask = function (id) {
+        vm.btnDisableStartTimeTracker = true;
+        vm.btnStartTask[id] = false;
+        vm.stopCounter();
+        vm.updateStatusTaskCounter(id);
         // method update task for LocalStorage
-        TimeTrackerService.updateValueLocalStorage(tt.values);
-        tt.timeCounter = 0;
+        TimeTrackerService.updateValueLocalStorage(TimeTrackerService.values);
+        vm.timeCounter = 0;
     };
 
     /*
      * Start: Counter task
      * */
-    tt.startCounter = function () {
+    vm.startCounter = function () {
         if (timer != null) {
-            tt.updateCounter();
+            vm.updateCounter();
         } else {
             timer = 0;
-            tt.updateCounter();
+            vm.updateCounter();
         }
     };
 
     /*
      * Stop: Counter task
      * */
-    tt.stopCounter = function () {
+    vm.stopCounter = function () {
         $timeout.cancel(timer);
         timer = null;
     };
@@ -121,24 +121,24 @@ var TimeTrackerCtrl = function ($scope, TimeTrackerService, $q, $http, $timeout,
     /*
      * Update: Counter task
      * */
-    tt.updateCounter = function () {
-        tt.timeCounter++;
-        tt.values[tt.editTimeTaskID].time += 1;
-        timer = $timeout(tt.startCounter, 1000);
+    vm.updateCounter = function () {
+        vm.timeCounter++;
+        TimeTrackerService.values[vm.edivmimeTaskID].time += 1;
+        timer = $timeout(vm.startCounter, 1000);
     };
 
 
     /*
      * Update: Status task counter
      * */
-    tt.updateStatusTaskCounter = function (id) {
-        tt.values[id].status = (tt.values[id].status === 'open') ? 'progress' : 'progress';
+    vm.updateStatusTaskCounter = function (id) {
+        TimeTrackerService.values[id].status = (TimeTrackerService.values[id].status === 'open') ? 'progress' : 'progress';
     };
 
     /*
      * Time format
      * */
-    tt.timeFormat = function (number) {
+    vm.timeFormat = function (number) {
         function num(val) {
             val = Math.floor(val);
             return val < 10 ? '0' + val : val;
@@ -154,7 +154,7 @@ var TimeTrackerCtrl = function ($scope, TimeTrackerService, $q, $http, $timeout,
     /*
      * Modal Add Task
      * */
-    tt.openModalAddTask = function (size) {
+    vm.openModalAddTask = function (size) {
         var modalInstance = $uibModal.open({
             templateUrl: 'scripts/controllers/time-tracker/modal/add-time-tracker.html',
             controller: 'TimeTrackerModalCtrl',
@@ -167,7 +167,7 @@ var TimeTrackerCtrl = function ($scope, TimeTrackerService, $q, $http, $timeout,
             }
         });
         modalInstance.result.then(function () {
-            tt.getValue();
+            vm.getValue();
         }, function () {
             console.log('Modal dismissed at: ' + new Date());
         });
@@ -176,7 +176,7 @@ var TimeTrackerCtrl = function ($scope, TimeTrackerService, $q, $http, $timeout,
     /*
      * Modal Edit Task
      * */
-    tt.editTask = function (id) {
+    vm.editTask = function (id) {
         var modalInstance = $uibModal.open({
             templateUrl: 'scripts/controllers/time-tracker/modal/add-time-tracker.html',
             controller: 'TimeTrackerModalCtrl',
@@ -184,12 +184,12 @@ var TimeTrackerCtrl = function ($scope, TimeTrackerService, $q, $http, $timeout,
             size: 'sm',
             resolve: {
                 data: function () {
-                    return tt.values[id];
+                    return TimeTrackerService.values[id];
                 }
             }
         });
         modalInstance.result.then(function () {
-            tt.getValue();
+            vm.getValue();
         }, function () {
             console.log('Modal dismissed at: ' + new Date());
         });
@@ -198,55 +198,55 @@ var TimeTrackerCtrl = function ($scope, TimeTrackerService, $q, $http, $timeout,
     /*
      * Set number page pagination
      * */
-    tt.setPage = function (number) {
-        tt.currentPage = number;
+    vm.setPage = function (number) {
+        vm.currentPage = number;
     };
 
     /*
      * Change pagination item
      * */
-    tt.pageChanged = function () {
-        console.log('Page changed to: ' + tt.currentPage);
+    vm.pageChanged = function () {
+        console.log('Page changed to: ' + vm.currentPage);
     };
 
     /*
      * Set count row tables
      * */
-    tt.setItemsPerPage = function (number) {
-        tt.itemsPerPage = number;
-        tt.currentPage = 1; //reset to first page
+    vm.setItemsPerPage = function (number) {
+        vm.itemsPerPage = number;
+        vm.currentPage = 1; //reset to first page
     };
 
     /*
      * Get data for table with pagination
      * */
-    tt.getDataTable = function () {
-        return tt.totalItems === 0 ? [] : tt.values.slice(((tt.currentPage - 1) * tt.itemsPerPage), ((tt.currentPage) * tt.itemsPerPage));
+    vm.getDataTable = function () {
+        return vm.totalItems === 0 ? [] : TimeTrackerService.values.slice(((vm.currentPage - 1) * vm.itemsPerPage), ((vm.currentPage) * vm.itemsPerPage));
     };
 
     /*
      * Update data for table with pagination
      * */
-    tt.updateDataTable = function () {
-        tt.dataTable = tt.getDataTable();
-        tt.totalItems = tt.values === null ? 0 : tt.values.length;
-        tt.itemsPerPage = tt.itemsPerPage ? tt.itemsPerPage : tt.tableLength;
+    vm.updateDataTable = function () {
+        // vm.dataTable = vm.getDataTable();
+        vm.totalItems = TimeTrackerService.values === null ? 0 : TimeTrackerService.values.length;
+        vm.itemsPerPage = vm.itemsPerPage ? vm.itemsPerPage : vm.tableLength;
     };
 
     /*
      * Sort table
      * */
-    tt.sort = function (key) {
-        $scope.sortKey = key;   //set the sortKey to the param passed
-        $scope.reverse = !$scope.reverse; //if true make it false and vice versa
+    vm.sort = function (key) {
+        vm.sortKey = key;   //set the sortKey to the param passed
+        vm.reverse = !vm.reverse; //if true make it false and vice versa
     };
 
     /*
      * Init Time Tracker Controller
      * */
-    tt.initTimeTrackerCtrl();
+    vm.initTimeTrackerCtrl();
 
 };
 
-TimeTrackerCtrl.$inject = ['$scope', 'TimeTrackerService', '$q', '$http', '$timeout', '$uibModal'];
+TimeTrackerCtrl.$inject = ['TimeTrackerService', '$q', '$http', '$timeout', '$uibModal'];
 angular.module('app').controller('TimeTrackerCtrl', TimeTrackerCtrl);

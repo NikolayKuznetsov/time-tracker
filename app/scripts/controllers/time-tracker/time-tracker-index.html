@@ -1,7 +1,7 @@
 <div class="row" ng-controller="TimeTrackerCtrl as timeTracker">
     <div class="col-md-9">
         <div ng-init="timeTracker.initTimeTrackerCtrl()">
-            <div class="panel panel-default">
+            <div class="panel panel-default" ng-if="timeTracker.getDataTable().length">
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-md-12">
@@ -54,7 +54,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="value in timeTracker.getDataTable() | orderBy:sortKey:reverse track by $index">
+                        <tr ng-repeat="value in timeTracker.getDataTable() | orderBy:timeTracker.sortKey:timeTracker.reverse track by $index">
                             <td class="index" ng-bind="value.id"></td>
                             <td class="name" ng-bind="value.name"></td>
                             <td class="time">

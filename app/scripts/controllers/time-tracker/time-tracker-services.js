@@ -1,60 +1,70 @@
 var TimeTrackerService = function (LocalStorageService) {
-    var tts = this;
+    var service = this;
 
-    tts.KEY_LOCAL_TIME_TRACKER = 'timeTrackerData';
-    tts.values = LocalStorageService.getObject(tts.KEY_LOCAL_TIME_TRACKER);
+    service.KEY_LOCAL_TIME_TRACKER = 'timeTrackerData';
+    service.values = [];
 
     /*
      *  Get all tasks with LocalStorage
      * */
-    tts.getValue = function () {
-        tts.values = LocalStorageService.getObject(tts.KEY_LOCAL_TIME_TRACKER);
+    service.getValue = function () {
+        service.values = service.getObjectTask() === null ? [] : service.getObjectTask();
     };
 
     /*
      *  Write tasks for LocalStorage
      * */
-    tts.addValueLocalStorage = function (jsonValues) {
-        if (tts.values === null) {
-            tts.values = jsonValues;
+    service.addValueLocalStorage = function (jsonValues) {
+        if (!service.values.length) {
+            service.values = jsonValues;
         } else {
-            tts.values = tts.values.concat(jsonValues);
+            service.values = service.values.concat(jsonValues);
         }
-
-        LocalStorageService.setObject(tts.KEY_LOCAL_TIME_TRACKER, tts.values);
+        service.setObjectTask(service.values);
     };
 
     /*
      *  Update tasks for LocalStorage
      * */
-    tts.updateValueLocalStorage = function (jsonValues) {
-        // remove all task for LocalStorage
-        // tts.removeValue();
+    service.updateValueLocalStorage = function (jsonValues) {
+        service.values = jsonValues;
 
-        tts.values = jsonValues;
-
-        LocalStorageService.setObject(tts.KEY_LOCAL_TIME_TRACKER, tts.values);
+        service.setObjectTask(service.values);
     };
 
     /*
      *  Remove all tasks with LocalStorage
      * */
-    tts.removeValue = function () {
-        tts.values = [];
+    service.removeValue = function () {
+        service.values = [];
 
-        LocalStorageService.removeString(tts.KEY_LOCAL_TIME_TRACKER);
+        LocalStorageService.removeString(service.KEY_LOCAL_TIME_TRACKER);
     };
 
     /*
      *  Remove one task with LocalStorage
      * */
-    tts.removeTask = function (id) {
-        tts.values.splice(id, 1);
+    service.removeTask = function (id) {
+        service.values.splice(id, 1);
 
-        LocalStorageService.setObject(tts.KEY_LOCAL_TIME_TRACKER, tts.values);
+        service.setObjectTask(service.values);
     };
 
-    tts.getValue();
+    /*
+     *  Set object json for LocalStorage
+     * */
+    service.setObjectTask = function (json) {
+        LocalStorageService.setObject(service.KEY_LOCAL_TIME_TRACKER, json);
+    };
+
+    /*
+     *  Get object json for LocalStorage
+     * */
+    service.getObjectTask = function () {
+        return LocalStorageService.getObject(service.KEY_LOCAL_TIME_TRACKER);
+    };
+
+    service.getValue();
 
 
 };
