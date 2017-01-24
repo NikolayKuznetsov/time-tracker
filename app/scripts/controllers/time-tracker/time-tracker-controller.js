@@ -4,6 +4,7 @@ var TimeTrackerCtrl = function (TimeTrackerService, $q, $http, $timeout, $uibMod
     vm.JSON_LOCAL_TIME_TRACKER = [];
     vm.title = 'List tasks';
 
+
     vm.timeCounter = 0;
     vm.btnStartTask = [];
     vm.btnDisableStartTimeTracker = true;
@@ -67,6 +68,13 @@ var TimeTrackerCtrl = function (TimeTrackerService, $q, $http, $timeout, $uibMod
     vm.removeTask = function (id) {
         TimeTrackerService.removeTask(id);
         vm.getValue();
+    };
+
+    /*
+     *  Get index remove task
+     * */
+    vm.getRemoveTask = function (index) {
+        return index + ((vm.currentPage - 1) * vm.itemsPerPage);
     };
 
     /*

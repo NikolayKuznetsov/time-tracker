@@ -71,7 +71,7 @@
                             <td class="data-create" ng-bind="value.dateCreate | date:'dd-MM-yyyy HH:mm'"></td>
                             <td class="action">
                                 <button class="btn btn-danger btn-sm"
-                                        ng-click="timeTracker.removeTask($index)">
+                                        ng-click="timeTracker.removeTask(timeTracker.getRemoveTask($index))">
                                     <i class="glyphicon glyphicon-trash"></i>
                                 </button>
                                 <button class="btn btn-default btn-sm"
