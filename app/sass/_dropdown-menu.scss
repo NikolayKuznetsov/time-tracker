@@ -1,0 +1,11 @@
+/* Dropdown menu */
+
+.items-per-page {
+  button, .dropdown-menu {
+    min-width: 54px;
+    max-width: 54px;
+  }
+  .dropdown-menu {
+    padding: 0;
+  }
+}

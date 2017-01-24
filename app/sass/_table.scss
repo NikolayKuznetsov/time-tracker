@@ -1,0 +1,8 @@
+/* Table styles */
+table {
+  th {
+    &.sort {
+      cursor: pointer;
+    }
+  }
+}

@@ -1,5 +1,9 @@
+@import "table";
+@import "table-size";
 @import "timeline";
 @import "button";
+@import "label";
+@import "dropdown-menu";
 
 body {
   font-family: "Roboto", Helvetica, Arial, sans-serif;
@@ -20,51 +24,4 @@ body {
   display: flex;
 }
 
-ul.timeline li {
-  position: relative;
-  border-bottom: 1px solid #e8e8e8;
-  clear: both;
-}
 
-.items-per-page {
-  button, .dropdown-menu {
-    min-width: 54px;
-    max-width: 54px;
-  }
-}
-
-#pieReport {
-  width: 248px;
-}
-
-/* Table */
-table {
-  th {
-    &.sort {
-      cursor: pointer;
-    }
-  }
-}
-.table--task {
-  .index {
-    width: 5%;
-  }
-  .time {
-    width: 10%;
-  }
-  .cost {
-    width: 10%;
-  }
-  .status {
-    width: 5%;
-  }
-  .message {
-    width: 20%;
-  }
-  .data-create {
-    width: 15%;
-  }
-  .action {
-    width: 15%;
-  }
-}
