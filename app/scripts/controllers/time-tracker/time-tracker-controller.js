@@ -4,8 +4,6 @@ var TimeTrackerCtrl = function (TimeTrackerService, $q, $http, $timeout, $uibMod
     vm.JSON_LOCAL_TIME_TRACKER = [];
     vm.title = 'List tasks';
 
-    // vm.values = TimeTrackerService.values;
-
     vm.timeCounter = 0;
     vm.btnStartTask = [];
     vm.btnDisableStartTimeTracker = true;
@@ -24,8 +22,6 @@ var TimeTrackerCtrl = function (TimeTrackerService, $q, $http, $timeout, $uibMod
      * */
     vm.initTimeTrackerCtrl = function () {
         vm.generationValueJson();
-        // TimeTrackerService.getValue();
-        // vm.getValue();
     };
 
     /*
@@ -54,7 +50,6 @@ var TimeTrackerCtrl = function (TimeTrackerService, $q, $http, $timeout, $uibMod
      *  Get all list tasks
      * */
     vm.getValue = function () {
-        // vm.values = TimeTrackerService.values;
         vm.updateDataTable();
     };
 
@@ -228,7 +223,6 @@ var TimeTrackerCtrl = function (TimeTrackerService, $q, $http, $timeout, $uibMod
      * Update data for table with pagination
      * */
     vm.updateDataTable = function () {
-        // vm.dataTable = vm.getDataTable();
         vm.totalItems = TimeTrackerService.values === null ? 0 : TimeTrackerService.values.length;
         vm.itemsPerPage = vm.itemsPerPage ? vm.itemsPerPage : vm.tableLength;
     };

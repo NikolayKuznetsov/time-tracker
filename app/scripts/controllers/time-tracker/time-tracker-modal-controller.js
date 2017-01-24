@@ -30,7 +30,6 @@ var TimeTrackerModalCtrl = function ($uibModalInstance, TimeTrackerService, data
         // Clean form
         vm.cleanForm();
         $uibModalInstance.close();
-        // vm.getValue();
     };
 
     /*
@@ -66,14 +65,6 @@ var TimeTrackerModalCtrl = function ($uibModalInstance, TimeTrackerService, data
         // Clean form
         vm.cleanForm();
         $uibModalInstance.close();
-        // vm.getValue();
-    };
-
-    /*
-     *  Get all tasks with LocalStorage
-     * */
-    vm.getValue = function () {
-        // vm.values = TimeTrackerService.values;
     };
 
     /*
