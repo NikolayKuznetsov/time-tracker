@@ -9,14 +9,14 @@ var TimeTrackerCtrl = function ($scope, TimeTrackerService, $q, $http, $timeout,
     tt.timeCounter = 0;
     tt.btnStartTask = [];
     tt.btnDisableStartTimeTracker = true;
-    tt.devProgress = false;
+    tt.devProgress = true;
     tt.editTimeTaskID = 0;
     var timer = true;
 
     /* variables for pagination */
     tt.tableLength = 5;
     tt.currentPage = 1;
-    tt.totalItems = tt.values.length;
+    tt.totalItems = tt.values === null ? 0 : tt.values.length;
     tt.itemsPerPage = tt.tableLength;
 
     /*
@@ -221,7 +221,7 @@ var TimeTrackerCtrl = function ($scope, TimeTrackerService, $q, $http, $timeout,
      * Get data for table with pagination
      * */
     tt.getDataTable = function () {
-        return tt.values.slice(((tt.currentPage - 1) * tt.itemsPerPage), ((tt.currentPage) * tt.itemsPerPage));
+        return tt.totalItems === 0 ? 0 : tt.values.slice(((tt.currentPage - 1) * tt.itemsPerPage), ((tt.currentPage) * tt.itemsPerPage));
     };
 
     /*
@@ -229,7 +229,7 @@ var TimeTrackerCtrl = function ($scope, TimeTrackerService, $q, $http, $timeout,
      * */
     tt.updateDataTable = function () {
         tt.dataTable = tt.getDataTable();
-        tt.totalItems = tt.values.length;
+        tt.totalItems = tt.values === null ? 0 : tt.values.length;
         tt.itemsPerPage = tt.itemsPerPage ? tt.itemsPerPage : tt.tableLength;
     };
 
