@@ -203,6 +203,10 @@ var TimeTrackerCtrl = function (TimeTrackerService, $q, $http, $timeout, $uibMod
      * */
     vm.setPage = function (number) {
         vm.currentPage = number;
+
+        console.log('totalItems', vm.totalItems);
+        console.log('itemsPerPage', vm.itemsPerPage);
+        console.log('currentPage', vm.currentPage);
     };
 
     /*
@@ -232,7 +236,11 @@ var TimeTrackerCtrl = function (TimeTrackerService, $q, $http, $timeout, $uibMod
      * */
     vm.updateDataTable = function () {
         vm.totalItems = TimeTrackerService.values === null ? 0 : TimeTrackerService.values.length;
-        vm.itemsPerPage = vm.itemsPerPage ? vm.itemsPerPage : vm.tableLength;
+        /// TODO
+        // vm.currentPage =  vm.totalItems - 1 < vm.itemsPerPage ? vm.currentPage - 1 : vm.currentPage;
+        console.log('totalItems', vm.totalItems);
+        console.log('itemsPerPage', vm.itemsPerPage);
+        console.log('currentPage', vm.currentPage);
     };
 
     /*
