@@ -54,7 +54,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="value in timeTracker.dataTable = timeTracker.getDataTable() | orderBy:sortKey:reverse track by $index">
+                        <tr ng-repeat="value in timeTracker.getDataTable() | orderBy:sortKey:reverse track by $index">
                             <td class="index" ng-bind="value.id"></td>
                             <td class="name" ng-bind="value.name"></td>
                             <td class="time">
@@ -71,7 +71,7 @@
                             <td class="data-create" ng-bind="value.dateCreate | date:'dd-MM-yyyy HH:mm'"></td>
                             <td class="action">
                                 <button class="btn btn-danger btn-sm"
-                                        ng-click="timeTracker.removeTask(value.id)">
+                                        ng-click="timeTracker.removeTask($index)">
                                     <i class="glyphicon glyphicon-trash"></i>
                                 </button>
                                 <button class="btn btn-default btn-sm"

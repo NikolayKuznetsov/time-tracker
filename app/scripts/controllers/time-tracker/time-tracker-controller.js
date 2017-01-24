@@ -221,7 +221,7 @@ var TimeTrackerCtrl = function ($scope, TimeTrackerService, $q, $http, $timeout,
      * Get data for table with pagination
      * */
     tt.getDataTable = function () {
-        return tt.totalItems === 0 ? 0 : tt.values.slice(((tt.currentPage - 1) * tt.itemsPerPage), ((tt.currentPage) * tt.itemsPerPage));
+        return tt.totalItems === 0 ? [] : tt.values.slice(((tt.currentPage - 1) * tt.itemsPerPage), ((tt.currentPage) * tt.itemsPerPage));
     };
 
     /*
