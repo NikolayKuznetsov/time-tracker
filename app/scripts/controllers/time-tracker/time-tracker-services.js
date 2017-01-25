@@ -61,7 +61,9 @@ var TimeTrackerService = function (LocalStorageService) {
      *  Get object json for LocalStorage
      * */
     service.getObjectTask = function () {
-        return LocalStorageService.getObject(service.KEY_LOCAL_TIME_TRACKER);
+        var array = LocalStorageService.getObject(service.KEY_LOCAL_TIME_TRACKER);
+        if (array === null) array = [];
+        return array;
     };
 
     service.getValue();

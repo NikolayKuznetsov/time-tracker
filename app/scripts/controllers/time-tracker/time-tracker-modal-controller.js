@@ -78,7 +78,6 @@ var TimeTrackerModalCtrl = function ($uibModalInstance, TimeTrackerService, data
      * Convert date to seconds
      * */
     vm.convertDateToSeconds = function (date) {
-        console.log(date);
         // var newDate = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
         return moment.duration($filter('date')(new Date(date), 'HH:mm:ss'), "HH:mm:ss").asSeconds();
     };

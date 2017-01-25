@@ -15,7 +15,7 @@ var TimeTrackerCtrl = function (TimeTrackerService, $q, $http, $timeout, $uibMod
     /* variables for pagination */
     vm.tableLength = 5;
     vm.currentPage = 1;
-    vm.totalItems = TimeTrackerService.values === null ? 0 : TimeTrackerService.values.length;
+    vm.totalItems = TimeTrackerService.values.length;
     vm.itemsPerPage = vm.tableLength;
 
     /*
@@ -203,10 +203,6 @@ var TimeTrackerCtrl = function (TimeTrackerService, $q, $http, $timeout, $uibMod
      * */
     vm.setPage = function (number) {
         vm.currentPage = number;
-
-        console.log('totalItems', vm.totalItems);
-        console.log('itemsPerPage', vm.itemsPerPage);
-        console.log('currentPage', vm.currentPage);
     };
 
     /*
@@ -235,11 +231,8 @@ var TimeTrackerCtrl = function (TimeTrackerService, $q, $http, $timeout, $uibMod
      * Update data for table with pagination
      * */
     vm.updateDataTable = function () {
-        vm.totalItems = TimeTrackerService.values === null ? 0 : TimeTrackerService.values.length;
-        vm.currentPage =  vm.itemsPerPage * (vm.currentPage - 1) == vm.totalItems ? vm.currentPage - 1 : vm.currentPage;
-        console.log('totalItems', vm.totalItems);
-        console.log('itemsPerPage', vm.itemsPerPage);
-        console.log('currentPage', vm.currentPage);
+        vm.totalItems = TimeTrackerService.values.length;
+        vm.currentPage = vm.totalItems == 0 ? 1 : vm.itemsPerPage * (vm.currentPage - 1) == vm.totalItems ? vm.currentPage - 1 : vm.currentPage;
     };
 
     /*
