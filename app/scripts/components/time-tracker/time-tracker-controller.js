@@ -159,7 +159,7 @@ var TimeTrackerCtrl = function (TimeTrackerService, $q, $http, $timeout, $uibMod
      * */
     vm.openModalAddTask = function (size) {
         var modalInstance = $uibModal.open({
-            templateUrl: 'scripts/controllers/time-tracker/modal/add-time-tracker.html',
+            templateUrl: 'scripts/components/time-tracker/modal/add-time-tracker.html',
             controller: 'TimeTrackerModalCtrl',
             controllerAs: '$ctrl',
             size: size,
@@ -181,7 +181,7 @@ var TimeTrackerCtrl = function (TimeTrackerService, $q, $http, $timeout, $uibMod
      * */
     vm.editTask = function (id) {
         var modalInstance = $uibModal.open({
-            templateUrl: 'scripts/controllers/time-tracker/modal/add-time-tracker.html',
+            templateUrl: 'scripts/components/time-tracker/modal/add-time-tracker.html',
             controller: 'TimeTrackerModalCtrl',
             controllerAs: '$ctrl',
             size: 'sm',

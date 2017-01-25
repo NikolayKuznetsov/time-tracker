@@ -1,7 +1,7 @@
 angular.module('app').config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
     var header = {
-        templateUrl: 'scripts/controllers/header/header-index.html',
+        templateUrl: 'scripts/components/header/header-index.html',
         controller: 'HeaderCtrl',
         controllerAs: 'header'
     };
@@ -14,7 +14,7 @@ angular.module('app').config(function ($stateProvider, $urlRouterProvider, $loca
             url: '/',
             views: {
                 'main': {
-                    templateUrl: 'scripts/controllers/main/main-index.html'
+                    templateUrl: 'scripts/components/main/main-index.html'
                 },
                 'header': header
             }
@@ -23,7 +23,7 @@ angular.module('app').config(function ($stateProvider, $urlRouterProvider, $loca
             url: '/login',
             views: {
                 'main': {
-                    templateUrl: 'scripts/controllers/login/login-index.html'
+                    templateUrl: 'scripts/components/login/login-index.html'
                 }
             }
         })
@@ -31,7 +31,7 @@ angular.module('app').config(function ($stateProvider, $urlRouterProvider, $loca
             url: '/time-tracker',
             views: {
                 'main': {
-                    templateUrl: 'scripts/controllers/time-tracker/time-tracker-index.html'
+                    templateUrl: 'scripts/components/time-tracker/time-tracker-index.html'
                 },
                 'header': header
             }
@@ -40,14 +40,14 @@ angular.module('app').config(function ($stateProvider, $urlRouterProvider, $loca
             url: '/time-tracker-report',
             views: {
                 'main': {
-                    templateUrl: 'scripts/controllers/time-tracker/report/report-time-tracker-index.html'
+                    templateUrl: 'scripts/components/time-tracker/report/report-time-tracker-index.html'
                 },
                 'header': header
             }
         });
         // .state('tablePagination', {
         //     url: '/table-pagination',
-        //     templateUrl: 'scripts/controllers/table-pagination/table-pagination-index.html'
+        //     templateUrl: 'scripts/components/table-pagination/table-pagination-index.html'
         // });
 
     $locationProvider.html5Mode(true);
