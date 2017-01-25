@@ -236,8 +236,7 @@ var TimeTrackerCtrl = function (TimeTrackerService, $q, $http, $timeout, $uibMod
      * */
     vm.updateDataTable = function () {
         vm.totalItems = TimeTrackerService.values === null ? 0 : TimeTrackerService.values.length;
-        /// TODO
-        // vm.currentPage =  vm.totalItems - 1 < vm.itemsPerPage ? vm.currentPage - 1 : vm.currentPage;
+        vm.currentPage =  vm.itemsPerPage * (vm.currentPage - 1) == vm.totalItems ? vm.currentPage - 1 : vm.currentPage;
         console.log('totalItems', vm.totalItems);
         console.log('itemsPerPage', vm.itemsPerPage);
         console.log('currentPage', vm.currentPage);
