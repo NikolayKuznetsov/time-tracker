@@ -139,22 +139,6 @@ var TimeTrackerCtrl = function (TimeTrackerService, $q, $http, $timeout, $uibMod
     };
 
     /*
-     * Time format
-     * */
-    vm.timeFormat = function (number) {
-        function num(val) {
-            val = Math.floor(val);
-            return val < 10 ? '0' + val : val;
-        }
-
-        var sec = number,
-            hours = sec / 3600 % 24,
-            minutes = sec / 60 % 60,
-            seconds = sec % 60;
-        return num(hours) + ":" + num(minutes) + ":" + num(seconds);
-    };
-
-    /*
      * Modal Add Task
      * */
     vm.openModalAddTask = function (size) {
