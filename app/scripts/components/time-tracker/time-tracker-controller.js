@@ -1,7 +1,7 @@
 var TimeTrackerCtrl = function (TimeTrackerService, $q, $http, $timeout, $uibModal) {
     var vm = this;
 
-    vm.JSON_LOCAL_TIME_TRACKER = [];
+    vm.jsonLocalTimeTrackerGeneration = [];
     vm.title = 'List tasks';
 
 
@@ -32,7 +32,7 @@ var TimeTrackerCtrl = function (TimeTrackerService, $q, $http, $timeout, $uibMod
         $http.get("/api/mainTimeTracking.json")
             .then(
                 function (response) {
-                    vm.JSON_LOCAL_TIME_TRACKER = response.data;
+                    vm.jsonLocalTimeTrackerGeneration = response.data;
                 },
                 function (error) {
                     console.log("The request failed: " + error);
@@ -43,7 +43,7 @@ var TimeTrackerCtrl = function (TimeTrackerService, $q, $http, $timeout, $uibMod
      *  Generation tasks
      * */
     vm.generationValue = function () {
-        TimeTrackerService.addValueLocalStorage(vm.JSON_LOCAL_TIME_TRACKER);
+        TimeTrackerService.addValueLocalStorage(vm.jsonLocalTimeTrackerGeneration);
         vm.getValue();
     };
 
