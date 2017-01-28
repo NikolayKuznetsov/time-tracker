@@ -3,9 +3,7 @@ var TimeTrackerCtrl = function (TimeTrackerService, $q, $http, $timeout, $uibMod
 
     vm.jsonLocalTimeTrackerGeneration = [];
     vm.title = 'List tasks';
-
-
-    vm.timeCounter = 0;
+    
     vm.btnStartTask = [];
     vm.btnDisableStartTimeTracker = true;
     vm.devProgress = true;
@@ -98,17 +96,13 @@ var TimeTrackerCtrl = function (TimeTrackerService, $q, $http, $timeout, $uibMod
         vm.updateStatusTaskCounter(id);
         // method update task for LocalStorage
         TimeTrackerService.updateValueLocalStorage(TimeTrackerService.values);
-        vm.timeCounter = 0;
     };
 
     /*
      * Start: Counter task
      * */
     vm.startCounter = function () {
-        if (timer != null) {
-            vm.updateCounter();
-        } else {
-            timer = 0;
+        if (timer) {
             vm.updateCounter();
         }
     };
@@ -118,14 +112,13 @@ var TimeTrackerCtrl = function (TimeTrackerService, $q, $http, $timeout, $uibMod
      * */
     vm.stopCounter = function () {
         $timeout.cancel(timer);
-        timer = null;
+        timer = true;
     };
 
     /*
      * Update: Counter task
      * */
     vm.updateCounter = function () {
-        vm.timeCounter++;
         TimeTrackerService.values[vm.editTimeTaskID].time += 1;
         timer = $timeout(vm.startCounter, 1000);
     };
